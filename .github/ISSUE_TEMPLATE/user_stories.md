@@ -1,3 +1,12 @@
+---
+name: "User Story Template"
+about: "Use this template to create user stories (Admin, Patient, Doctor)"
+title: ""
+labels: ["user-story"]
+assignees: []
+---
+
+
 # User Story Template
 
 **Title:**
