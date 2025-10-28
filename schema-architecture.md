@@ -8,5 +8,5 @@ This Spring Boot application uses both MVC and REST controllers. Thymeleaf templ
 4. The service layer handles business logic and calls the repository
 5. The repository layer interacts with the databases using Spring Data JPA for mySQL and Spring Data Mongo for MongoDB
 6. Model binding with @Entity for mySQL and @Document for MongoDB
-7. Application models/data passed to Thymeleaf templates or serialized from dtos to JSON in the REST flows.
+7. Application models/data passed to Thymeleaf templates or serialized from DTOs to JSON in the REST flows.
 
