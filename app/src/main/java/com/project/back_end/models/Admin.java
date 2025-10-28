@@ -1,5 +1,8 @@
 package com.project.back_end.models;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class Admin {
 
 // @Entity annotation:
