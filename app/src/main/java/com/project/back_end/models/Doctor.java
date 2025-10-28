@@ -1,5 +1,16 @@
 package com.project.back_end.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
+import java.util.List;
+
+@Entity
+@Table(name = "doctors")
 public class Doctor {
 
 // @Entity annotation:
@@ -61,5 +72,99 @@ public class Doctor {
 // 8. Getters and Setters:
 //    - Standard getter and setter methods are provided for all fields: id, name, specialty, email, password, phone, and availableTimes.
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotNull
+    @Size(min = 3, max = 100)
+    private String name;
+
+    @NotNull
+    @Size(min = 3, max = 100)
+    private String specialty;
+
+    @NotNull
+    @Email
+    private String email;
+
+    @NotNull
+    @Size(min = 6)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
+
+    @NotNull
+    @Pattern(regexp = "^[0-9]{10}$")
+    private String phone;
+
+    @ElementCollection
+    @Column(name = "available_times")
+    private List<String> availableTimes;
+
+    public Doctor(Long id, String name, String specialty, String email, String password, String phone, List<String> availableTimes) {
+        this.id = id;
+        this.name = name;
+        this.specialty = specialty;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.availableTimes = availableTimes;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public @NotNull @Size(min = 3, max = 100) String getName() {
+        return name;
+    }
+
+    public void setName(@NotNull @Size(min = 3, max = 100) String name) {
+        this.name = name;
+    }
+
+    public @NotNull @Size(min = 3, max = 100) String getSpecialty() {
+        return specialty;
+    }
+
+    public void setSpecialty(@NotNull @Size(min = 3, max = 100) String specialty) {
+        this.specialty = specialty;
+    }
+
+    public @NotNull @Email String getEmail() {
+        return email;
+    }
+
+    public void setEmail(@NotNull @Email String email) {
+        this.email = email;
+    }
+
+    public @NotNull @Size(min = 6) String getPassword() {
+        return password;
+    }
+
+    public void setPassword(@NotNull @Size(min = 6) String password) {
+        this.password = password;
+    }
+
+    public @NotNull @Pattern(regexp = "^[0-9]{10}$") String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(@NotNull @Pattern(regexp = "^[0-9]{10}$") String phone) {
+        this.phone = phone;
+    }
+
+    public List<String> getAvailableTimes() {
+        return availableTimes;
+    }
+
+    public void setAvailableTimes(List<String> availableTimes) {
+        this.availableTimes = availableTimes;
+    }
 }
 

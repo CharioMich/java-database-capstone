@@ -1,5 +1,15 @@
 package com.project.back_end.models;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotNull;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
+@Entity
+@Table(name = "appointments")
 public class Appointment {
 
   // @Entity annotation:
@@ -68,5 +78,87 @@ public class Appointment {
 // 10. Getters and Setters:
 //    - Standard getter and setter methods are provided for accessing and modifying the fields: id, doctor, patient, appointmentTime, status, etc.
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @NotNull
+    private Doctor doctor;
+
+    @ManyToOne
+    @NotNull
+    private Patient patient;
+
+    @Future
+    @Column(name = "appointment_time")
+    private LocalDateTime appointmentTime;
+
+    @NotNull
+    private int status;
+
+    @Transient
+    private LocalDateTime getEndTime() {
+        return appointmentTime.plusHours(1);
+    }
+
+    @Transient
+    private LocalDate getAppointmentDate() {
+        return appointmentTime.toLocalDate();
+    }
+
+    @Transient
+    private LocalTime getAppointmentTimeOnly() {
+        return appointmentTime.toLocalTime();
+    }
+
+    public Appointment(Long id, Doctor doctor, Patient patient, LocalDateTime appointmentTime, int status) {
+        this.id = id;
+        this.doctor = doctor;
+        this.patient = patient;
+        this.appointmentTime = appointmentTime;
+        this.status = status;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public @NotNull Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(@NotNull Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public @NotNull Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(@NotNull Patient patient) {
+        this.patient = patient;
+    }
+
+    public @Future LocalDateTime getAppointmentTime() {
+        return appointmentTime;
+    }
+
+    public void setAppointmentTime(@Future LocalDateTime appointmentTime) {
+        this.appointmentTime = appointmentTime;
+    }
+
+    @NotNull
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(@NotNull int status) {
+        this.status = status;
+    }
 }
 
