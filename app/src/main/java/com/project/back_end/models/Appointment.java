@@ -90,7 +90,7 @@ public class Appointment {
     @NotNull
     private Patient patient;
 
-    @Future
+    @Future(message = "Appointment time must be in the future")
     @Column(name = "appointment_time")
     private LocalDateTime appointmentTime;
 
