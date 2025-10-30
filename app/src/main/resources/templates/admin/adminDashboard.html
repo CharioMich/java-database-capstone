@@ -107,3 +107,92 @@ with search, filter, and modal functionality.
 
  -->
 
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 4. Character Encoding -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 5. Favicon -->
+    <link rel="icon" type="image/png" th:href="@{/assets/images/logo/logo.png}" />
+
+    <!-- 6. Page Title -->
+    <title>Admin Dashboard</title>
+
+    <!-- 7. CSS Stylesheets -->
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/assets/css/adminDashboard.css}" />
+
+    <!-- 8. Common JavaScript Files (deferred) -->
+    <script th:src="@{/js/util.js}" defer></script>
+    <script th:src="@{/js/render.js}" defer></script>
+    <script th:src="@{/js/components/header.js}" defer></script>
+    <script th:src="@{/js/components/footer.js}" defer></script>
+</head>
+
+<body onload="renderContent()">
+
+<!-- 10. Container -->
+<div class="container">
+
+    <!-- 11. Wrapper -->
+    <div class="wrapper">
+
+        <!-- 12. Header Placeholder -->
+        <div id="header"></div>
+
+        <!-- 13. Main Section -->
+        <main class="main-content">
+
+            <!-- 14. Search Bar -->
+            <div class="search-section">
+                <input type="text" id="searchBar" placeholder="Search doctors..." />
+            </div>
+
+            <!-- 15. Filter Dropdowns -->
+            <div class="filters">
+                <select id="timeFilter">
+                    <option value="">All Times</option>
+                    <option value="AM">Morning (AM)</option>
+                    <option value="PM">Evening (PM)</option>
+                </select>
+
+                <select id="specialtyFilter">
+                    <option value="">All Specialties</option>
+                    <option value="Cardiologist">Cardiologist</option>
+                    <option value="Dentist">Dentist</option>
+                    <option value="Dermatologist">Dermatologist</option>
+                    <option value="Neurologist">Neurologist</option>
+                    <option value="Pediatrician">Pediatrician</option>
+                    <option value="Surgeon">Surgeon</option>
+                </select>
+            </div>
+
+            <!-- 16. Content Display Area -->
+            <div id="content" class="content-area"></div>
+
+        </main>
+
+        <!-- 17. Footer Placeholder -->
+        <div id="footer"></div>
+
+    </div>
+</div>
+
+<!-- 18. Modal Structure -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" id="closeModal">&times;</span>
+        <div id="modal-body"></div>
+    </div>
+</div>
+
+<!-- 19. Page-Specific JavaScript Modules -->
+<script type="module" th:src="@{/js/adminDashboard.js}" defer></script>
+<script type="module" th:src="@{/js/components/doctorCard.js}" defer></script>
+
+</body>
+</html>
+
+
