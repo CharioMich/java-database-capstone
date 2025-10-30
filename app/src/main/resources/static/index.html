@@ -102,3 +102,42 @@ and triggers modal-based login functionality.
     * Properly close all opened tags to complete the document structure.
 
  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="./assets/images/logo/logo.png">
+    <link rel="stylesheet" href="./assets/css/index.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script src="./js/util.js" defer></script>
+    <script src="./js/render.js" defer></script>
+    <script src="./js/components/header.js" defer></script>
+    <script src="./js/components/footer.js" defer></script>
+    <title>Smart Clinic</title>
+</head>
+<body>
+    <main class="main-content">
+        <h2>Select Your Role</h2>
+        <button id="admin-btn" onclick="">Admin</button>
+        <button id="doctor-btn" onclick="">Doctor</button>
+        <button id="patient-btn" onclick="">Patient</button>
+        <div class="container">
+            <div class="wrapper">
+                <div id="header"></div>
+                <div id="footer"></div>
+            </div>
+        </div>
+        <div id="modal" class="modal">
+            <button id="closeModal"></button>
+            <div id="modal-body">
+
+            </div>
+        </div>
+    </main>
+</body>
+<script type="module" src="./js/services/index.js" defer></script>
+</html>
