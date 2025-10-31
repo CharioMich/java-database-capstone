@@ -1,5 +1,14 @@
 package com.project.back_end.mvc;
 
+import com.project.back_end.services.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.Map;
+
+@Controller
 public class DashboardController {
 
 // 1. Set Up the MVC Controller Class:
@@ -26,5 +35,31 @@ public class DashboardController {
 //    - If the token is valid, forwards the user to the `"doctor/doctorDashboard"` view.
 //    - If the token is invalid, redirects to the root URL.
 
+    @Autowired
+    private Service service;
+
+    @GetMapping("/adminDashboard/{token}")
+    public String adminDashboard(@PathVariable("token") String token) {
+
+        Map<String, Object> validationResult = service.validateToken(token, "admin");
+
+        if (validationResult.isEmpty()) {
+            return "admin/adminDashboard";
+        } else {
+            return "redirect:http://localhost:8080";
+        }
+    }
+
+    @GetMapping("/doctorDashboard/{token}")
+    public String doctorDashboard(@PathVariable("token") String token) {
+
+        Map<String, Object> validationResult = service.validateToken(token, "doctor");
+
+        if (validationResult.isEmpty()) {
+            return "doctor/doctorDashboard";
+        } else {
+            return "redirect:http://localhost:8080";
+        }
+    }
 
 }
