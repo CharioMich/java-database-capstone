@@ -26,5 +26,27 @@ public class Login {
 //    - The 'getPassword()' method allows access to the password value.
 //    - The 'setPassword(String password)' method sets the password value.
 
+    private String identifier;  // Not just email, cause admin logs in with username
+    private String password;
 
+    public Login(String identifier, String password) {
+        this.identifier = identifier;
+        this.password = password;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
