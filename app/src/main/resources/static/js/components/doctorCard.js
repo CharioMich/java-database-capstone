@@ -41,7 +41,7 @@ Import the overlay function for booking appointments from loggedPatient.js
 */
 
 
-import { showBookingOverlay } from '../loggedPatient.js'; // Assuming this function is in a file that is sibling or higher
+import { showBookingOverlay } from '../loggedPatient.js';
 import { deleteDoctor } from '../services/doctorServices.js';
 import { getPatientData } from '../services/patientServices.js';
 
