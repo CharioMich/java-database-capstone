@@ -20,7 +20,7 @@ public class ValidationFailed {
         // Iterate through all the validation errors
         for (FieldError error : ex.getBindingResult().getFieldErrors()) {
             String errorMessage = error.getDefaultMessage();
-            errors.put("message", "" + errorMessage);
+            errors.put("message", errorMessage);
         }
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
