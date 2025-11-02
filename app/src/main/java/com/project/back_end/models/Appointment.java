@@ -98,17 +98,17 @@ public class Appointment {
     private int status;
 
     @Transient
-    private LocalDateTime getEndTime() {
+    public LocalDateTime getEndTime() {
         return appointmentTime.plusHours(1);
     }
 
     @Transient
-    private LocalDate getAppointmentDate() {
+    public LocalDate getAppointmentDate() {
         return appointmentTime.toLocalDate();
     }
 
     @Transient
-    private LocalTime getAppointmentTimeOnly() {
+    public LocalTime getAppointmentTimeOnly() {
         return appointmentTime.toLocalTime();
     }
 
