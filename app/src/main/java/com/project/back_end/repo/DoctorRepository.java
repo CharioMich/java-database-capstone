@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     // 1. Extend JpaRepository:
@@ -20,7 +21,7 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     //      - This method retrieves a Doctor by their email.
     //      - Return type: Doctor
     //      - Parameters: String email
-    Doctor findByEmail(String email);
+    Optional<Doctor> findByEmail(String email);
 
 
     //    - **findByNameLike**:
