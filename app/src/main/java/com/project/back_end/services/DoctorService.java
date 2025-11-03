@@ -170,6 +170,7 @@ public class DoctorService {
     //    - Validates a doctor's login by checking if the email and password match an existing doctor record.
     //    - It generates a token for the doctor if the login is successful, otherwise returns an error message.
     //    - Instruction: Make sure to handle invalid login attempts and password mismatches properly with error responses.
+    @Transactional
     public ResponseEntity<Map<String, String>> validateDoctor(Login login) {
         Map<String, String> response = new HashMap<>();
         try {
@@ -223,6 +224,7 @@ public class DoctorService {
     //    - Filters doctors based on their name, specialty, and availability during a specific time (AM/PM).
     //    - The method fetches doctors matching the name and specialty criteria, then filters them based on their availability during the specified time period.
     //    - Instruction: Ensure proper filtering based on both the name and specialty as well as the specified time period.
+    @Transactional(readOnly = true)
     public Map<String, Object> filterDoctorsByNameSpecialityAndTime(String name, String speciality, String amOrPm) {
         Map<String, Object> response = new HashMap<>();
 
@@ -267,6 +269,7 @@ public class DoctorService {
     //    - Filters a list of doctors based on whether their available times match the specified time period (AM/PM).
     //    - This method processes a list of doctors and their available times to return those that fit the time criteria.
     //    - Instruction: Ensure that the time filtering logic correctly handles both AM and PM time slots and edge cases.
+    @Transactional(readOnly = true)
     public Map<String, Object> filterDoctorByTime(String amOrPm) {
         Map<String, Object> response = new HashMap<>();
 
@@ -311,6 +314,7 @@ public class DoctorService {
     //    - Filters doctors based on their name and the specified time period (AM/PM).
     //    - Fetches doctors based on partial name matching and filters the results to include only those available during the specified time period.
     //    - Instruction: Ensure that the method correctly filters doctors based on the given name and time of day (AM/PM).
+    @Transactional(readOnly = true)
     public Map<String, Object> filterDoctorByNameAndTime(String name, String amOrPm) {
         Map<String, Object> response = new HashMap<>();
 
@@ -356,6 +360,7 @@ public class DoctorService {
     //    - Filters doctors by name and specialty.
     //    - It ensures that the resulting list of doctors matches both the name (case-insensitive) and the specified specialty.
     //    - Instruction: Ensure that both name and specialty are considered when filtering doctors.
+    @Transactional(readOnly = true)
     public Map<String, Object> filterDoctorByNameAndSpeciality(String name, String speciality) {
         Map<String, Object> response = new HashMap<>();
 
@@ -378,6 +383,7 @@ public class DoctorService {
     //    - Filters doctors based on their specialty and availability during a specific time period (AM/PM).
     //    - Fetches doctors based on the specified specialty and filters them based on their available time slots for AM/PM.
     //    - Instruction: Ensure the time filtering is accurately applied based on the given specialty and time period (AM/PM).
+    @Transactional(readOnly = true)
     public Map<String, Object> filterDoctorByTimeAndSpeciality(String speciality, String amOrPm) {
         Map<String, Object> response = new HashMap<>();
 
@@ -421,6 +427,7 @@ public class DoctorService {
     //    - Filters doctors based on their specialty.
     //    - This method fetches all doctors matching the specified specialty and returns them.
     //    - Instruction: Make sure the filtering logic works for case-insensitive specialty matching.
+    @Transactional(readOnly = true)
     public Map<String, Object> filterDoctorBySpeciality(String speciality) {
         Map<String, Object> response = new HashMap<>();
 
@@ -439,6 +446,7 @@ public class DoctorService {
     //    - Filters all doctors based on their availability during a specific time period (AM/PM).
     //    - The method checks all doctors' available times and returns those available during the specified time period.
     //    - Instruction: Ensure proper filtering logic to handle AM/PM time periods.
+    @Transactional(readOnly = true)
     public Map<String, Object> filterDoctorsByTime(String amOrPm) {
         Map<String, Object> response = new HashMap<>();
         try {
@@ -478,5 +486,5 @@ public class DoctorService {
             return response;
         }
     }
-   
+
 }
