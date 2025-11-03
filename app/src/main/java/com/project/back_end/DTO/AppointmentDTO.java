@@ -91,16 +91,16 @@ public class AppointmentDTO {
 //    - Standard getter methods are provided for all fields: id, doctorId, doctorName, patientId, patientName, patientEmail, patientPhone, patientAddress, appointmentTime, status, appointmentDate, appointmentTimeOnly, and endTime.
 //    - These methods allow access to the values of the fields in the AppointmentDTO object.
 
-    private Long id;
-    private Long doctorId;
-    private String doctorName;
-    private Long patientId;
-    private String patientName;
-    private String patientEmail;
-    private String patientPhone;
-    private String patientAddress;
-    private LocalDateTime appointmentTime;
-    private int status;
+    private final Long id;
+    private final Long doctorId;
+    private final String doctorName;
+    private final Long patientId;
+    private final String patientName;
+    private final String patientEmail;
+    private final String patientPhone;
+    private final String patientAddress;
+    private final LocalDateTime appointmentTime;
+    private final int status;
     // Derived fields
     private LocalDate appointmentDate;
     private LocalTime appointmentTimeOnly;
