@@ -124,7 +124,7 @@ public class AppointmentService {
         Map<String, String> response = new HashMap<>();
 
         try {
-            String patientEmail = tokenService.extractEmail(token);
+            String patientEmail = tokenService.extractIdentifier(token);
 
             Patient patient = patientRepository.findByEmail(patientEmail)
                     .orElseThrow(() -> new EntityNotFoundException("Invalid token."));
@@ -158,7 +158,7 @@ public class AppointmentService {
         Map<String, Object> response = new HashMap<>();
         List<Appointment> appointments;
         try {
-            Doctor doctor = doctorRepository.findByEmail(tokenService.extractEmail(token))
+            Doctor doctor = doctorRepository.findByEmail(tokenService.extractIdentifier(token))
                     .orElseThrow(() -> new EntityNotFoundException("Doctor not found - Invalid Token"));
 
             // Convert LocalDate to LocalDateTime at start of day (00:00)
