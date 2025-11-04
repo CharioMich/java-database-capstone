@@ -26,7 +26,7 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     //      - This method retrieves a Patient by either their email or phone number, allowing flexibility for the search.
     //      - Return type: Patient
     //      - Parameters: String email, String phone
-    Patient findByEmailOrPhone(String email, String phone);
+    Optional<Patient> findByEmailOrPhone(String email, String phone);
 
 
     // 3. @Repository annotation:
