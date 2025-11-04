@@ -114,6 +114,7 @@ public class PatientService {
                             appointment.getStatus()
                     )).toList();
 
+            response.put("status", "success");
             response.put("appointments", appointmentDTOS);
 
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -151,6 +152,7 @@ public class PatientService {
                             appointment.getStatus()
                     )).toList();
 
+            response.put("status", "success");
             response.put("appointments", appointmentDTOS);
 
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -186,6 +188,7 @@ public class PatientService {
                             appointment.getStatus()
                     )).toList();
 
+            response.put("status", "success");
             response.put("appointments", appointmentDTOS);
 
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -207,10 +210,11 @@ public class PatientService {
     public ResponseEntity<Map<String, Object>> getPatientDetails(String token) {
         Map<String, Object> response = new HashMap<>();
         try {
-            String email = tokenService.extractEmail(token);
+            String email = tokenService.extractIdentifier(token);
             Patient patient = patientRepository.findByEmail(email)
                     .orElseThrow(() -> new EntityNotFoundException("Patient not found"));
 
+            response.put("status", "success");
             response.put("patient", patient);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch(EntityNotFoundException e) {

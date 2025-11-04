@@ -43,8 +43,11 @@ public class PrescriptionService {
         try {
             if (!prescriptionRepository.findByAppointmentId(prescription.getAppointmentId()).isEmpty()) // Not solid business logic! Needs refactoring.
                 throw new EntityExistsException("Prescription already exists");
+
             prescriptionRepository.save(prescription);
-            response.put("success", "Prescription added successfully.");
+
+            response.put("status", "success");
+            response.put("message", "Prescription added successfully.");
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } catch(EntityExistsException e) {
             response.put("error", e.getMessage());
@@ -69,7 +72,9 @@ public class PrescriptionService {
             if (prescriptions.isEmpty())
                     throw new EntityNotFoundException("Prescription not found");
 
+            response.put("status", "success");
             response.put("prescriptions", prescriptions);
+
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch(EntityNotFoundException e) {
             response.put("error", e.getMessage());

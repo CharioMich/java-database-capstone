@@ -102,6 +102,7 @@ public class AppointmentService {
             existingAppointment.setAppointmentTime(appointment.getAppointmentTime());
             appointmentRepository.save(existingAppointment);
             // Successful response
+            response.put("status", "success");
             response.put("message", "Appointment updated successfully.");
             return new ResponseEntity<>(response, HttpStatus.OK);
 
@@ -138,7 +139,8 @@ public class AppointmentService {
             }
 
             appointmentRepository.delete(appointment);
-            response.put("success", "Appointment cancelled successfully!");
+            response.put("status", "success");
+            response.put("message", "Appointment cancelled successfully!");
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             response.put("error", e.getMessage());
@@ -179,7 +181,8 @@ public class AppointmentService {
                 ;appointments = appointmentRepository
                         .findByDoctorIdAndAppointmentTimeBetween(doctor.getId(), startOfDay, endOfDay);
             }
-            response.put("success", appointments);
+            response.put("status", "success");
+            response.put("appointments", appointments);
             return new ResponseEntity<>(response, HttpStatus.OK);
 
         } catch (EntityNotFoundException e) {
@@ -204,7 +207,8 @@ public class AppointmentService {
             Appointment appointment = appointmentRepository.findById(id)
                     .orElseThrow(() -> new EntityNotFoundException("Appointment not found."));
             appointmentRepository.updateStatus(status, id);
-            response.put("success", "Appointment status updated to: " + status);
+            response.put("status", "success");
+            response.put("message", "Appointment status updated to: " + status);
             return new ResponseEntity<>(response, HttpStatus.OK);
 
         } catch (EntityNotFoundException e) {

@@ -60,7 +60,8 @@ public class Service {
             boolean isValid = tokenService.validateToken(token, user);
 
             if (isValid) {
-                response.put("success", "Token is valid");
+                response.put("status", "success");
+                response.put("message", "Token is valid");
                 return new ResponseEntity<>(response, HttpStatus.OK);
             } else {
                 response.put("error", "Invalid token or expired");
@@ -95,6 +96,8 @@ public class Service {
             }
 
             String token = tokenService.generateToken(admin.getUsername());
+
+            response.put("status", "success");
             response.put("token", token);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
@@ -177,6 +180,8 @@ public class Service {
             }
             // Generate JWT token for patient using the email
             String token = tokenService.generateToken(login.getIdentifier());
+
+            response.put("status", "success");
             response.put("token", token);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (EntityNotFoundException e) {
@@ -218,6 +223,7 @@ public class Service {
             } else {
                 // No filters — get all appointments for this patient
                 filteredAppointments = patientService.getPatientAppointment(patient.getId());
+                response.put("status", "success");
                 response.put("appointments", filteredAppointments);
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }

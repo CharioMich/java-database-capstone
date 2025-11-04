@@ -183,7 +183,8 @@ public class DoctorService {
             String token = tokenService.generateToken(doctorEmail);
             response.put("token", token);
             // Success message
-            response.put("success", "Password confirmed for doctor with email: " + doctorEmail);
+            response.put("status", "success");
+            response.put("message", "Password confirmed for doctor with email: " + doctorEmail);
             // Response
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch(EntityNotFoundException e) {
@@ -212,6 +213,7 @@ public class DoctorService {
             // @ElementCollection(fetch = FetchType.EAGER) inside the Doctor entity
             doctors.forEach(d -> d.getAvailableTimes().size());
 
+            response.put("status", "success");
             response.put("doctors", doctors);
             return response;
         } catch(Exception e) {
@@ -256,6 +258,7 @@ public class DoctorService {
                     })
                     .collect(Collectors.toList());
 
+            response.put("status", "success");
             response.put("doctors", filteredDoctors);
             return response;
         } catch (Exception e) {
@@ -301,6 +304,7 @@ public class DoctorService {
 
                     }).toList();
 
+            response.put("status", "success");
             response.put("doctors", filteredDoctors);
             return response;
         } catch (Exception e) {
@@ -346,6 +350,7 @@ public class DoctorService {
 
                     }).toList();
 
+            response.put("status", "success");
             response.put("doctors", filteredDoctors);
             return response;
         } catch (Exception e) {
@@ -370,6 +375,7 @@ public class DoctorService {
                     speciality
             );
 
+            response.put("status", "success");
             response.put("doctors", doctors);
             return response;
         } catch (Exception e) {
@@ -415,6 +421,7 @@ public class DoctorService {
 
                     }).toList();
 
+            response.put("status", "success");
             response.put("doctors", filteredDoctors);
             return response;
         } catch (Exception e) {
@@ -433,6 +440,7 @@ public class DoctorService {
 
         try {
             List<Doctor> doctors = doctorRepository.findBySpecialtyIgnoreCase(speciality);
+            response.put("status", "success");
             response.put("doctors", doctors);
             return response;
         } catch (Exception e) {
@@ -478,6 +486,7 @@ public class DoctorService {
                     })
                     .toList();
 
+            response.put("status", "success");
             response.put("doctors", filteredDoctors);
             return response;
         } catch (Exception e) {
