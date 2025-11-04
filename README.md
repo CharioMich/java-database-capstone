@@ -15,7 +15,24 @@ Since Spring MVC is used for this project, code is organized into three layers:
 - View: UI or presentation layer  
 - Controller: Handles input and orchestrates between Model and View
 
-Info: Big enumerated comment blocks in some project files are the initial code development instructions provided by the course.
+## Info: 
+- Big enumerated comment blocks in some project files are the initial code development instructions provided by the course.
+- There is a central Service class that provides multiple functionalities: authentication, validation, and coordination across entities.  
+
+## Improvements 
+The project is developed under the course instructions, so any personal opinions regarding structure, logic or design are limited.
+Below I am stating some things I would personally implement differently.
+- Common responses among methods. Some return zeros and ones while others true or false
+- Password encoding
+- More robust role checking. Current one is fragile and introduces potential security issues
+- Spring security implementation
+- Common API response structure
+- Global error handling
+- Separation of validation logic into a validator class
+- Implementation of Mapper class to map entities to DTOs and vice versa
+- Records as DTOs
+- Use of Lombok annotations for reducing boilerplate code
+
 
 🚧 Project Under Construction...
 
