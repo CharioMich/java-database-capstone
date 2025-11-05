@@ -137,7 +137,7 @@ public class DoctorService {
         try {
             return doctorRepository.findAll();
         } catch (Exception e) {
-            System.out.println("Error in getting all doctors");
+            System.out.println("Error in getting all doctors. Error: " + e.getMessage());
             return List.of();
         }
     }
@@ -160,7 +160,7 @@ public class DoctorService {
             System.out.println(e.getMessage());
             return -1;
         } catch (Exception e) {
-            System.out.println("Error in deleting doctor");
+            System.out.println("Error in deleting doctor. Error: " + e.getMessage());
             return 0;
         }
     }
