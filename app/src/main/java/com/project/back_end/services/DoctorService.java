@@ -133,7 +133,7 @@ public class DoctorService {
     //    - Fetches all doctors from the database. It is marked with `@Transactional` to ensure that the collection is properly loaded.
     //    - Instruction: Ensure that the collection is eagerly loaded, especially if dealing with lazy-loaded relationships (e.g., available times).
     @Transactional(readOnly = true)
-    List<Doctor> getDoctors() {
+    public List<Doctor> getDoctors() {
         try {
             return doctorRepository.findAll();
         } catch (Exception e) {
