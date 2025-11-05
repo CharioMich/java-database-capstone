@@ -21,17 +21,17 @@ Since Spring MVC is used for this project, code is organized into three layers:
 
 ## Improvements 
 The project is developed under the course instructions, so any personal opinions regarding structure, logic or design are limited.
-Below I am stating some things I would personally implement differently.
+Below I am stating some things I would personally implement differently:
 - Common responses among methods. Some return zeros and ones while others true or false
-- Password encoding
-- More robust role checking. Current one is fragile and introduces potential security issues
-- Spring security implementation
-- Common API response structure
-- Global error handling
-- Separation of validation logic into a validator class
 - Implementation of Mapper class to map entities to DTOs and vice versa
-- Records as DTOs
+- More robust role checking. Current one is fragile and introduces potential security issues
+- Spring security implementation & Password encoding
+- Access Token to be transferred via the headers and not in the url.
 - Use of Lombok annotations for reducing boilerplate code
+- Separation of validation logic into a validator class
+- Global error handling
+- Records as DTOs
+
 
 
 🚧 Project Under Construction...
