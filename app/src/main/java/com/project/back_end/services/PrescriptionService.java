@@ -70,7 +70,7 @@ public class PrescriptionService {
         try {
             List<Prescription> prescriptions = prescriptionRepository.findByAppointmentId(appointmentId);
             if (prescriptions.isEmpty())
-                    throw new EntityNotFoundException("Prescription not found");
+                    throw new EntityNotFoundException("No prescriptions found for given appointment.");
 
             response.put("status", "success");
             response.put("prescriptions", prescriptions);
