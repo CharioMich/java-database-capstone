@@ -41,13 +41,13 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     //      - It combines both fields for a more specific search.
     //      - Return type: List<Doctor>
     //      - Parameters: String name, String specialty
-    @Query("""
-            SELECT d FROM Doctor d
-            WHERE
-                LOWER(d.name) LIKE LOWER(CONCAT('%', :name, '%'))
-            AND
-                AND LOWER(d.specialty) = LOWER(:specialty)
-            """)
+//    @Query("""
+//            SELECT d FROM Doctor d
+//            WHERE
+//                LOWER(d.name) LIKE LOWER(CONCAT('%', :name, '%'))
+//            AND
+//                LOWER(d.specialty) = LOWER(:specialty)
+//            """)
     List<Doctor> findByNameContainingIgnoreCaseAndSpecialtyIgnoreCase(String name, String specialty);
 
 
