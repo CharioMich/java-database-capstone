@@ -51,6 +51,8 @@ public class Admin {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+    public Admin() {}
+
     public Admin(Long id, String username, String password) {
         this.id = id;
         this.username = username;

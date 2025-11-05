@@ -88,6 +88,8 @@ public class Patient {
     @Size(max = 255)
     private String address;
 
+    public Patient() {}
+
     public Patient(Long id, String name, String email, String password, String phone, String address) {
         this.id = id;
         this.name = name;

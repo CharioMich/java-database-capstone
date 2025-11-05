@@ -78,6 +78,8 @@ public class Prescription {
     @Size(max = 200)
     private String doctorNotes;
 
+    public Prescription() {}
+
     public Prescription(String id, String patientName, Long appointmentId, String medication, String dosage, String doctorNotes) {
         this.id = id;
         this.patientName = patientName;

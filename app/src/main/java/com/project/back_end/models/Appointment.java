@@ -112,6 +112,8 @@ public class Appointment {
         return appointmentTime.toLocalTime();
     }
 
+    public Appointment() {}
+
     public Appointment(Long id, Doctor doctor, Patient patient, LocalDateTime appointmentTime, int status) {
         this.id = id;
         this.doctor = doctor;

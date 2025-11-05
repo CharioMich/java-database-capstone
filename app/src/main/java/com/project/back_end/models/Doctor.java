@@ -97,9 +97,11 @@ public class Doctor {
     @Pattern(regexp = "^[0-9]{10}$")
     private String phone;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @Column(name = "available_times")
     private List<String> availableTimes;
+
+    public Doctor() {}
 
     public Doctor(Long id, String name, String specialty, String email, String password, String phone, List<String> availableTimes) {
         this.id = id;
