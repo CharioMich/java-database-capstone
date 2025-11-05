@@ -5,6 +5,7 @@ import com.project.back_end.models.Appointment;
 import com.project.back_end.models.Patient;
 import com.project.back_end.repo.AppointmentRepository;
 import com.project.back_end.repo.PatientRepository;
+import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,8 +45,14 @@ public class PatientService {
     @Transactional
     public int createPatient(Patient patient) {
         try {
+            if (patientRepository.findById(patient.getId()).isPresent())
+                throw new EntityExistsException("Patient already exists.");
+
             patientRepository.save(patient);
             return 1;
+        } catch (EntityExistsException e) {
+            System.out.println("Patient with id: " + patient.getId() + " already exists.");
+            return -1;
         } catch (Exception e) {
             System.out.println("Error creating new patient");
             return 0;
