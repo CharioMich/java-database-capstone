@@ -113,24 +113,25 @@ and triggers modal-based login functionality.
     <link rel="icon" href="./assets/images/logo/logo.png">
     <link rel="stylesheet" href="./assets/css/index.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <script src="./js/util.js" defer></script>
-    <script src="./js/render.js" defer></script>
-    <script src="./js/components/header.js" defer></script>
-    <script src="./js/components/footer.js" defer></script>
+    <script src="./js/util.js" type="module" defer></script>
+    <script src="./js/render.js" type="module" defer></script>
+    <script src="./js/components/header.js" type="module" defer></script>
+    <script src="./js/components/footer.js" type="module" defer></script>
     <title>Smart Clinic</title>
 </head>
 <body>
+    <div id="header"></div>
     <main class="main-content">
-        <h2>Select Your Role</h2>
-        <button id="admin-btn" onclick="">Admin</button>
-        <button id="doctor-btn" onclick="">Doctor</button>
-        <button id="patient-btn" onclick="">Patient</button>
+        
         <div class="container">
             <div class="wrapper">
-                <div id="header"></div>
-                <div id="footer"></div>
+                <h2>Select Your Role</h2>
+                <button class="role-btn" id="admin-btn" onclick="">Admin</button>
+                <button class="role-btn"  id="doctor-btn" onclick="">Doctor</button>
+                <button class="role-btn"  id="patient-btn" onclick="">Patient</button>
             </div>
         </div>
+        <div id="footer"></div>
         <div id="modal" class="modal">
             <button id="closeModal"></button>
             <div id="modal-body">

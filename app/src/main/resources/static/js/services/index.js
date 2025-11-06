@@ -57,137 +57,165 @@
     - Show a generic error message
 */
 
-import {openModal} from '../components/modals.js';
-import {API_BASE_URL} from '../config/config.js';
+/* js/services/index.js */
 
-const ADMIN_API = API_BASE_URL + '/admin';
-const DOCTOR_API = API_BASE_URL + '/doctor/login';
+// Import the openModal function to handle showing login popups/modals
+// (Assuming path relative to 'js/services/index.js' to get to 'js/render.js')
+import { selectRole } from '../render.js';
 
-import { openModal } from '../components/modals.js';
+// Import the base API URL from the config file
+// (Assuming a 'config.js' file one level up)
 import { API_BASE_URL } from '../config/config.js';
 
-const ADMIN_API = API_BASE_URL + '/admin';
-const DOCTOR_API = API_BASE_URL + '/doctor/login';
+// Define constants for the admin and doctor login API endpoints using the base URL
+const ADMIN_API = `${API_BASE_URL}/api/admin/login`;
+const DOCTOR_API = `${API_BASE_URL}/api/doctor/login`;
 
-// Setup Button Event Listeners
-window.onload = function () {
-    const adminBtn = document.getElementById('adminLogin');
-    const doctorBtn = document.getElementById('doctorLogin');
+/**
+ * Use the window.onload event to ensure DOM elements are available after page load
+ */
+window.onload = () => {
+    // Select the role buttons using the IDs from index.html
+    const adminBtn = document.getElementById('admin-btn');
+    const doctorBtn = document.getElementById('doctor-btn');
+    const patientBtn = document.getElementById('patient-btn');
 
-    // Admin Login Button
+    // If the admin login button exists:
+    // Add a click event listener that calls openModal('adminLogin')
     if (adminBtn) {
         adminBtn.addEventListener('click', () => {
-            openModal('adminLogin');
+            selectRole('admin');
         });
     }
 
-    // Doctor Login Button
+    // If the doctor login button exists:
+    // Add a click event listener that calls openModal('doctorLogin')
     if (doctorBtn) {
         doctorBtn.addEventListener('click', () => {
-            openModal('doctorLogin');
+            selectRole('doctor');
+        });
+    }
+
+    // (Logic for Patient button, based on its presence in the HTML)
+    if (patientBtn) {
+        patientBtn.addEventListener('click', () => {
+            // Assuming 'patientLogin' is the modal type for patients
+            // Or 'patientRegister' if that's the primary action
+            selectRole('patient');
         });
     }
 };
 
-// --- Admin Login Handler ---
-// Make it globally accessible by attaching to window
-window.adminLoginHandler = async function () {
+/**
+ * Define a function named adminLoginHandler on the global window object
+ * This function will be triggered when the admin submits their login credentials
+ * (from within the modal form)
+ */
+window.adminLoginHandler = async () => {
     try {
         // Step 1: Get the entered username and password from the input fields
-        const username = document.getElementById('adminUsername').value;
-        const password = document.getElementById('adminPassword').value;
+        // (Assuming IDs from a form loaded into the modal)
+        const usernameInput = document.getElementById('admin-username');
+        const passwordInput = document.getElementById('admin-password');
+
+        if (!usernameInput || !passwordInput) {
+            console.error('Admin login form fields not found in modal.');
+            return;
+        }
+
+        const username = usernameInput.value;
+        const password = passwordInput.value;
 
         // Step 2: Create an admin object with these credentials
-        const admin = { username, password };
+        const admin = {
+            username: username,
+            password: password,
+        };
 
         // Step 3: Use fetch() to send a POST request to the ADMIN_API endpoint
         const response = await fetch(ADMIN_API, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(admin)
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            // Convert the admin object to JSON and send in the body
+            body: JSON.stringify(admin),
         });
 
-        // Step 4 & 5: Handle response
+        // Step 4: If the response is successful:
         if (response.ok) {
-            // Successful login
             const data = await response.json();
-            const token = data.token; // Assuming the token is returned in a 'token' field
-
             // Store the token in localStorage
-            localStorage.setItem('authToken', token);
-
-            // Call selectRole('admin') to proceed with admin-specific behavior
-            // NOTE: Assuming selectRole() is defined/available globally (e.g., in render.js)
-            if (typeof selectRole === 'function') {
-                 selectRole('admin');
-            } else {
-                console.error("selectRole function not found. Cannot set role and redirect.");
-                // Optionally redirect manually if selectRole is unavailable
-            }
-
-        } else if (response.status === 401 || response.status === 403) {
-            // Invalid credentials (assuming 401 or 403 for unauthorized/forbidden)
-            alert("Invalid credentials!");
+            localStorage.setItem('token', data.token);
+            // Call selectRole('admin') to proceed (assuming selectRole is a global function)
+            // Or redirect:
+            window.location.href = '/admin-dashboard.html'; // Example redirect
         } else {
-            // Other unsuccessful response statuses
-            alert("Login failed! Please try again.");
+            // Step 5: If login fails or credentials are invalid:
+            // Show an alert with an error message
+            alert('Invalid admin credentials. Please try again.');
         }
-
     } catch (error) {
-        // Step 6: Handle network or unexpected errors
-        console.error("Error during Admin login:", error);
-        alert("An unexpected error occurred. Please try again later.");
+        // Step 6: Wrap everything in a try-catch to handle network or server errors
+        console.error('Admin login error:', error);
+        alert('An error occurred during admin login. Please try again later.');
     }
 };
 
-// --- Doctor Login Handler ---
-// Make it globally accessible by attaching to window
-window.doctorLoginHandler = async function () {
+/**
+ * Define a function named doctorLoginHandler on the global window object
+ * This function will be triggered when a doctor submits their login credentials
+ * (from within the modal form)
+ */
+window.doctorLoginHandler = async () => {
     try {
         // Step 1: Get the entered email and password from the input fields
-        const email = document.getElementById('doctorEmail').value;
-        const password = document.getElementById('doctorPassword').value;
+        // (Assuming IDs from a form loaded into the modal)
+        const emailInput = document.getElementById('doctor-email');
+        const passwordInput = document.getElementById('doctor-password');
+
+        if (!emailInput || !passwordInput) {
+            console.error('Doctor login form fields not found in modal.');
+            return;
+        }
+        
+        const email = emailInput.value;
+        const password = passwordInput.value;
 
         // Step 2: Create a doctor object with these credentials
-        const doctor = { email, password };
+        const doctor = {
+            email: email,
+            password: password,
+        };
 
         // Step 3: Use fetch() to send a POST request to the DOCTOR_API endpoint
         const response = await fetch(DOCTOR_API, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(doctor)
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            // Include headers and request body similar to admin login
+            body: JSON.stringify(doctor),
         });
 
-        // Step 4 & 5: Handle response
+        // Step 4: If login is successful:
         if (response.ok) {
-            // Successful login
             const data = await response.json();
-            const token = data.token; // Assuming the token is returned in a 'token' field
-
             // Store the token in localStorage
-            localStorage.setItem('authToken', token);
-
-            // Call selectRole('doctor') to proceed with doctor-specific behavior
-            // NOTE: Assuming selectRole() is defined/available globally (e.g., in render.js)
-            if (typeof selectRole === 'function') {
-                 selectRole('doctor');
-            } else {
-                console.error("selectRole function not found. Cannot set role and redirect.");
-                // Optionally redirect manually if selectRole is unavailable
-            }
-
-        } else if (response.status === 401 || response.status === 403) {
-            // Invalid credentials
-            alert("Invalid credentials!");
+            localStorage.setItem('token', data.token);
+            // Call selectRole('doctor') to proceed (assuming selectRole is a global function)
+            // Or redirect:
+            window.location.href = '/doctor-dashboard.html'; // Example redirect
         } else {
-            // Other unsuccessful response statuses
-            alert("Login failed! Please try again.");
+            // Step 5: If login fails:
+            // Show an alert for invalid credentials
+            alert('Invalid doctor credentials. Please try again.');
         }
-
     } catch (error) {
-        // Step 6: Handle network or unexpected errors
-        console.error("Error during Doctor login:", error);
-        alert("An unexpected error occurred. Please try again later.");
+        // Step 6: Wrap in a try-catch block to handle errors gracefully
+        // Log the error to the console
+        console.error('Doctor login error:', error);
+        // Show a generic error message
+        alert('An error occurred during doctor login. Please try again later.');
     }
 };
-

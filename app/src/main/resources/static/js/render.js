@@ -1,6 +1,7 @@
 // render.js
+import { getRole, setRole } from "./util.js";
 
-function selectRole(role) {
+export const selectRole = (role) => {
   setRole(role);
   const token = localStorage.getItem('token');
   if (role === "admin") {
@@ -19,10 +20,12 @@ function selectRole(role) {
 }
 
 
-function renderContent() {
+export const renderContent = () => {
   const role = getRole();
   if (!role) {
     window.location.href = "/"; // if no role, send to role selection page
     return;
   }
 }
+
+window.renderContent = renderContent;

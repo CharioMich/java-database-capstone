@@ -11,11 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function loadDoctorCards() {
   getDoctors()
-    .then(doctors => {
+    .then(res => {
       const contentDiv = document.getElementById("content");
       contentDiv.innerHTML = "";
 
-      doctors.forEach(doctor => {
+      res["doctors"].forEach(doctor => {
         const card = createDoctorCard(doctor);
         contentDiv.appendChild(card);
       });
@@ -105,7 +105,8 @@ function filterDoctorsOnChange() {
 
   filterDoctors(name, time, specialty)
     .then(response => {
-      const doctors = response.doctors;
+    console.log(response); // TODO DEBUG
+      const doctors = response["doctors"];
       const contentDiv = document.getElementById("content");
       contentDiv.innerHTML = "";
 

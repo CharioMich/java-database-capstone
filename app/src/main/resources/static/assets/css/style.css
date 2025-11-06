@@ -1,165 +1,208 @@
 /* This is the style sheet for global change across the files. */
 
-/* style.css */
+/* style.css - Shared styles for header and footer components */
+
+/* ===== HEADER SECTION ===== */
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f4f4f4;
-    color: #333;
-    padding: 10px 20px;
-    border-bottom: 2px solid #ccc;
-    flex-wrap: wrap;
-    min-height: 60px;
-  }
-  
-  /* Logo section with image + title */
-  .logo-link{
-    display: flex;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f4f4f4;
+  color: #333;
+  padding: 10px 20px;
+  border-bottom: 2px solid #ccc;
+  flex-wrap: wrap;
+  min-height: 60px;
+  width: 100vw;
+}
+
+/* Logo section with image + title */
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-img {
+  height: 40px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Logo text / title */
+.logo-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Navigation styling */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #003e3e;
+}
+
+/* Admin/role-specific buttons in header */
+.adminBtn {
+  background-color: #015c5d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.adminBtn:hover {
+  background-color: #003e3e;
+}
+
+/* Doctor-specific header styling */
+.doctorHeader {
+  margin-right: 30px;
+}
+
+.doctorHeader:hover {
+  color: #A62B1F;
+}
+
+/* Responsive header */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
     gap: 10px;
-    
   }
-  
+
+  nav {
+    margin-top: 10px;
+    gap: 10px;
+  }
+
   .logo-img {
-    height: 40px;
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
+    height: 30px;
   }
-  
-  /* Logo text / slogan */
+
   .logo-title {
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
+    font-size: 18px;
   }
   
-  /* Nav links styling */
-  nav a {
-    margin-left: 20px;
-    margin-right: 20px;
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
+  .adminBtn {
+    font-size: 13px;
+    padding: 6px 12px;
   }
-  
-  nav a:hover {
-    color: #003e3e;
-  }
-  
+}
 
-  /* Responsive behavior */
-  @media (max-width: 600px) {
-    .header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    nav {
-      margin-top: 10px;
-    }
-  
-    nav a {
-      margin-left: 0;
-      margin-right: 10px;
-    }
-  
-    .logo-img {
-      height: 30px;
-    }
-  
-    .logo-title {
-      font-size: 18px;
-    }
-  }
 
-  .doctorHeader{
-    margin-right: 30px
-  }
-  .doctorHeader:hover{
-    color:#A62B1F;
-  }
-/* Footer Section */
+/* ===== FOOTER SECTION ===== */
 .footer {
-    background-color: #f4f4f4;
-    color: #fff;
-    padding: 40px 20px;
-    border-top: 2px solid #f4f4f4;
-    
+  background-color: #f4f4f4;
+  color: #0a0a23;
+  padding: 40px 20px;
+  border-top: 2px solid #ccc;
+  margin-top: auto;
+  width: 100vw;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-logo {
+  flex: 1 1 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.footer-logo img {
+  height: 50px;
+  width: auto;
+}
+
+.footer-logo p {
+  font-size: 14px;
+  color: #0a0a23;
+  line-height: 1.5;
+}
+
+.footer-links {
+  display: flex;
+  flex: 2 1 500px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 140px;
+}
+
+.footer-column h4 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #0a0a23;
+}
+
+.footer-column a {
+  text-decoration: none;
+  color: #0a0a23;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.footer-column a:hover {
+  color: #003e3e;
+}
+
+/* Responsive footer */
+@media (max-width: 768px) {
+  .footer {
+    padding: 30px 15px;
   }
   
   .footer-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .footer-logo {
-    flex: 1 1 250px;
-    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 15px;
+    gap: 25px;
   }
-  
-  .footer-logo img {
-    height: 50px;
-    width: auto;
-  }
-  
-  .footer-logo p {
-    font-size: 14px;
-    color: #0a0a23;
-  }
-  
+
   .footer-links {
-    display: flex;
-    flex: 2 1 500px;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 20px;
+    width: 100%;
   }
   
   .footer-column {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    width: 100%;
   }
-  
-  .footer-column h4 {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #0a0a23;
-  }
-  
-  .footer-column a {
-    text-decoration: none;
-    color: #0a0a23;
-    font-size: 14px;
-  }
-  
-  .footer-column a:hover {
-    color: #003e3e;
-    transition: color 0.3s ease;
-  }
-  
-  /* Mobile Responsiveness */
-  @media (max-width: 768px) {
-    .footer-container {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .footer-links {
-      flex-direction: column;
-      gap: 20px;
-    }
-  }
+}
   
 
   .modal {

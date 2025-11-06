@@ -188,33 +188,15 @@ export async function saveDoctor(doctor, token) {
     }
 }
 
-/**
- * Function: filterDoctors
- * Purpose: Fetch doctors based on filtering criteria (name, time, and specialty).
- * @param {string} [name=''] - Name filter.
- * @param {string} [time=''] - Time/Availability filter.
- * @param {string} [specialty=''] - Specialty filter.
- * @returns {Array<Object>} An array of filtered doctor objects, or an empty array on failure.
- */
 export async function filterDoctors(name = '', time = '', specialty = '') {
-    // Construct the query parameters string, ensuring empty strings are handled
-    const queryName = name ? `name=${encodeURIComponent(name)}` : '';
-    const queryTime = time ? `time=${encodeURIComponent(time)}` : '';
-    const querySpecialty = specialty ? `specialty=${encodeURIComponent(specialty)}` : '';
-
-    // Join parameters with '&', filtering out empty ones
-    const queryParams = [queryName, queryTime, querySpecialty].filter(p => p).join('&');
-
-    // Construct the full URL for the GET request
-    // Assuming the filter endpoint is DOCTOR_API/filter/param1/param2/param3 as per typical REST path filtering,
-    // OR, more standardly, using query parameters. We will use query parameters for standard REST practices.
-    const url = `${DOCTOR_API}/filter?${queryParams}`;
-
-    // NOTE: Based on the instruction 'passing these values as route parameters' vs query params,
-    // if the server expects path params, the URL would be:
-    // const url = `${DOCTOR_API}/filter/${name || 'null'}/${time || 'null'}/${specialty || 'null'}`;
-    // We will stick with the cleaner query parameters approach unless path parameters are strictly required by the API.
-    // If you need the path parameter approach, replace the URL construction above with the commented one.
+//    Encode each parameter for URL safety, using 'null' for empty values as path parameters are required
+//    const encodedName = name ? encodeURIComponent(name) : 'null';
+//    const encodedTime = time ? encodeURIComponent(time) : 'null';
+//    const encodedspecialty = specialty ? encodeURIComponent(specialty) : 'null';
+//
+//    // Construct the full URL with path parameters
+//    const url = `${DOCTOR_API}/filter/${encodedName}/${encodedTime}/${encodedspecialty}`;
+    const url = `${DOCTOR_API}/filter/${name}/${time}/${specialty}`;
 
     try {
         // Use fetch() with the GET method

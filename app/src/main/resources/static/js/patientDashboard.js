@@ -4,7 +4,7 @@ import { openModal } from './components/modals.js';
 import { createDoctorCard } from './components/doctorCard.js';
 import { filterDoctors } from './services/doctorServices.js';//call the same function to avoid duplication coz the functionality was same
 import { patientSignup, patientLogin } from './services/patientServices.js';
-
+import { renderContent } from './render.js';
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -29,11 +29,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function loadDoctorCards() {
   getDoctors()
-    .then(doctors => {
+    .then(res => {
       const contentDiv = document.getElementById("content");
       contentDiv.innerHTML = "";
 
-      doctors.forEach(doctor => {
+      console.log("DOCTORS:", res); // TODO DEBUG
+
+      res["doctors"].forEach(doctor => {
         const card = createDoctorCard(doctor);
         contentDiv.appendChild(card);
       });
