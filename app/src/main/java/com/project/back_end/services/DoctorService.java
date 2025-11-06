@@ -210,8 +210,8 @@ public class DoctorService {
             // Eager loading by "touching" the list, inside a @Transactional method
             // Alternatively we could "JOIN FETCH" in the findByNameLike in the repository
             // or
-            // @ElementCollection(fetch = FetchType.EAGER) inside the Doctor entity
-            doctors.forEach(d -> d.getAvailableTimes().size());
+            // @ElementCollection(fetch = FetchType.EAGER) inside the Doctor model
+            // doctors.forEach(d -> d.getAvailableTimes().size());
 
             response.put("status", "success");
             response.put("doctors", doctors);
@@ -222,18 +222,18 @@ public class DoctorService {
         }
     }
 
-    // 11. **filterDoctorsByNameSpecialityAndTime Method**:
+    // 11. **filterDoctorsByNameSpecialtyAndTime Method**:
     //    - Filters doctors based on their name, specialty, and availability during a specific time (AM/PM).
     //    - The method fetches doctors matching the name and specialty criteria, then filters them based on their availability during the specified time period.
     //    - Instruction: Ensure proper filtering based on both the name and specialty as well as the specified time period.
     @Transactional(readOnly = true)
-    public Map<String, Object> filterDoctorsByNameSpecialityAndTime(String name, String speciality, String amOrPm) {
+    public Map<String, Object> filterDoctorsByNameSpecialtyAndTime(String name, String specialty, String amOrPm) {
         Map<String, Object> response = new HashMap<>();
 
         try {
             List<Doctor> doctors = doctorRepository.findByNameContainingIgnoreCaseAndSpecialtyIgnoreCase(
                     name,
-                    speciality
+                    specialty
             );
 
             String period = amOrPm.trim().toUpperCase();
@@ -263,7 +263,7 @@ public class DoctorService {
             return response;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            response.put("error", "Error while filtering doctors by name, speciality and time");
+            response.put("error", "Error while filtering doctors by name, specialty and time");
             return response;
         }
     }
@@ -361,18 +361,18 @@ public class DoctorService {
     }
 
 
-    // 14. **filterDoctorByNameAndSpeciality Method**:
+    // 14. **filterDoctorByNameAndSpecialty Method**:
     //    - Filters doctors by name and specialty.
     //    - It ensures that the resulting list of doctors matches both the name (case-insensitive) and the specified specialty.
     //    - Instruction: Ensure that both name and specialty are considered when filtering doctors.
     @Transactional(readOnly = true)
-    public Map<String, Object> filterDoctorByNameAndSpeciality(String name, String speciality) {
+    public Map<String, Object> filterDoctorByNameAndSpecialty(String name, String specialty) {
         Map<String, Object> response = new HashMap<>();
 
         try {
             List<Doctor> doctors = doctorRepository.findByNameContainingIgnoreCaseAndSpecialtyIgnoreCase(
                     name,
-                    speciality
+                    specialty
             );
 
             response.put("status", "success");
@@ -380,21 +380,21 @@ public class DoctorService {
             return response;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            response.put("error", "Error while filtering doctors by name and speciality");
+            response.put("error", "Error while filtering doctors by name and specialty");
             return response;
         }
     }
 
-    // 15. **filterDoctorByTimeAndSpeciality Method**:
+    // 15. **filterDoctorByTimeAndSpecialty Method**:
     //    - Filters doctors based on their specialty and availability during a specific time period (AM/PM).
     //    - Fetches doctors based on the specified specialty and filters them based on their available time slots for AM/PM.
     //    - Instruction: Ensure the time filtering is accurately applied based on the given specialty and time period (AM/PM).
     @Transactional(readOnly = true)
-    public Map<String, Object> filterDoctorByTimeAndSpeciality(String speciality, String amOrPm) {
+    public Map<String, Object> filterDoctorByTimeAndSpecialty(String specialty, String amOrPm) {
         Map<String, Object> response = new HashMap<>();
 
         try {
-            List<Doctor> doctors = doctorRepository.findBySpecialtyIgnoreCase(speciality);
+            List<Doctor> doctors = doctorRepository.findBySpecialtyIgnoreCase(specialty);
 
             String period = amOrPm.trim().toUpperCase();
 
@@ -426,26 +426,26 @@ public class DoctorService {
             return response;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            response.put("error", "Error while filtering doctors by speciality and time");
+            response.put("error", "Error while filtering doctors by specialty and time");
             return response;
         }
     }
-    // 16. **filterDoctorBySpeciality Method**:
+    // 16. **filterDoctorBySpecialty Method**:
     //    - Filters doctors based on their specialty.
     //    - This method fetches all doctors matching the specified specialty and returns them.
     //    - Instruction: Make sure the filtering logic works for case-insensitive specialty matching.
     @Transactional(readOnly = true)
-    public Map<String, Object> filterDoctorBySpeciality(String speciality) {
+    public Map<String, Object> filterDoctorBySpecialty(String specialty) {
         Map<String, Object> response = new HashMap<>();
 
         try {
-            List<Doctor> doctors = doctorRepository.findBySpecialtyIgnoreCase(speciality);
+            List<Doctor> doctors = doctorRepository.findBySpecialtyIgnoreCase(specialty);
             response.put("status", "success");
             response.put("doctors", doctors);
             return response;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            response.put("error", "Error while filtering doctors by speciality");
+            response.put("error", "Error while filtering doctors by specialty");
             return response;
         }
     }
