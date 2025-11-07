@@ -5,6 +5,7 @@ import { createDoctorCard } from './components/doctorCard.js';
 import { filterDoctors } from './services/doctorServices.js';//call the same function to avoid duplication coz the functionality was same
 import { patientSignup, patientLogin } from './services/patientServices.js';
 import { renderContent } from './render.js';
+import { setRole } from './util.js';
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -32,8 +33,6 @@ function loadDoctorCards() {
     .then(res => {
       const contentDiv = document.getElementById("content");
       contentDiv.innerHTML = "";
-
-      console.log("DOCTORS:", res); // TODO DEBUG
 
       res["doctors"].forEach(doctor => {
         const card = createDoctorCard(doctor);
@@ -80,11 +79,12 @@ function filterDoctorsOnChange() {
     })
     .catch(error => {
       console.error("Failed to filter doctors:", error);
-      alert("❌ An error occurred while filtering doctors.");
+      alert("An error occurred while filtering doctors.");
     });
 }
 
-window.signupPatient = async function () {
+
+export async function signupPatient() {
   try {
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
@@ -102,35 +102,37 @@ window.signupPatient = async function () {
     else alert(message);
   } catch (error) {
     console.error("Signup failed:", error);
-    alert("❌ An error occurred while signing up.");
+    alert("An error occurred while signing up.");
   }
 };
 
-window.loginPatient = async function () {
+
+export async function loginPatient() {
   try {
-    const email = document.getElementById("email").value;
+    const identifier = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    const data = {
-      email,
+    const login = {
+      identifier,
       password
     }
-    console.log("loginPatient :: ", data)
-    const response = await patientLogin(data);
+    console.log("loginPatient :: ", login)
+    const response = await patientLogin(login);
+
     console.log("Status Code:", response.status);
     console.log("Response OK:", response.ok);
     if (response.ok) {
       const result = await response.json();
       console.log(result);
-      selectRole('loggedPatient');
+      setRole('loggedPatient');
       localStorage.setItem('token', result.token)
       window.location.href = '/pages/loggedPatientDashboard.html';
     } else {
-      alert('❌ Invalid credentials!');
+      alert('Invalid credentials!');
     }
   }
   catch (error) {
-    alert("❌ Failed to Login : ", error);
+    alert("Failed to Login : ", error);
     console.log("Error :: loginPatient :: ", error)
   }
 

@@ -196,7 +196,13 @@ export async function filterDoctors(name = '', time = '', specialty = '') {
 //
 //    // Construct the full URL with path parameters
 //    const url = `${DOCTOR_API}/filter/${encodedName}/${encodedTime}/${encodedspecialty}`;
-    const url = `${DOCTOR_API}/filter/${name}/${time}/${specialty}`;
+
+    // Normalize undefined/null to empty strings
+    name = name ?? '';
+    time = time ?? '';
+    specialty = specialty ?? '';
+
+    const url = `${DOCTOR_API}/filter?name=${name}&time=${time}&specialty=${specialty}`;
 
     try {
         // Use fetch() with the GET method

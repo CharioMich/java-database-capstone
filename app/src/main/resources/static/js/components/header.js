@@ -127,6 +127,8 @@
   Header Component - Dynamically renders header based on user role and session
 */
 
+import { openModal } from '../components/modals.js';
+
 // Main function to render the header
 function renderHeader() {
   // Select the header div where content will be inserted

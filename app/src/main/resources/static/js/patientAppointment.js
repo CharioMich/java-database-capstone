@@ -25,7 +25,7 @@ async function initializePage() {
     renderAppointments(allAppointments);
   } catch (error) {
     console.error("Error loading appointments:", error);
-    alert("❌ Failed to load your appointments.");
+    alert("Failed to load your appointments.");
   }
 }
 
@@ -99,7 +99,7 @@ async function handleFilterChange() {
     renderAppointments(filteredAppointments);
   } catch (error) {
     console.error("Failed to filter appointments:", error);
-    alert("❌ An error occurred while filtering appointments.");
+    alert("An error occurred while filtering appointments.");
   }
 }
 

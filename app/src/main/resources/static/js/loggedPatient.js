@@ -79,7 +79,7 @@ export function showBookingOverlay(e, doctor, patient) {
       ripple.remove();
       modalApp.remove();
     } else {
-      alert("❌ Failed to book an appointment :: " + message);
+      alert("Failed to book an appointment :: " + message);
     }
   });
 }
@@ -105,7 +105,7 @@ function filterDoctorsOnChange() {
 
   filterDoctors(name, time, specialty)
     .then(response => {
-    console.log(response); // TODO DEBUG
+//    console.log(response);
       const doctors = response["doctors"];
       const contentDiv = document.getElementById("content");
       contentDiv.innerHTML = "";
@@ -123,7 +123,7 @@ function filterDoctorsOnChange() {
     })
     .catch(error => {
       console.error("Failed to filter doctors:", error);
-      alert("❌ An error occurred while filtering doctors.");
+      alert("An error occurred while filtering doctors.");
     });
 }
 

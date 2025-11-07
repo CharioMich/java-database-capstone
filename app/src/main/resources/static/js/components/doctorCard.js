@@ -81,7 +81,7 @@ export function createDoctorCard(doctor) {
     const availability = document.createElement("p");
     availability.classList.add("availability");
     // Join an array of availability times into a string for display
-    const availableTimes = Array.isArray(doctor.availability) ? doctor.availability.join(", ") : doctor.availability;
+    const availableTimes = Array.isArray(doctor.availableTimes) ? doctor.availableTimes.join(", ") : doctor.availableTimes;
     availability.textContent = `Available: ${availableTimes}`;
 
     // Append all info elements to the doctor info container
