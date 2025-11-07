@@ -4,6 +4,15 @@ import { createDoctorCard } from './components/doctorCard.js';
 import { filterDoctors } from './services/doctorServices.js';
 import { bookAppointment } from './services/appointmentRecordService.js';
 
+document.addEventListener("DOMContentLoaded", () => {
+  // --- FIX #1: Check if the 'content' div exists ---
+  // This code runs on page load, but 'content' only exists on the patient page.
+  // It prevents loading doctors even if we are on index.html page which gets triggered from the imports chain
+  const contentDiv = document.getElementById("content");
+  if (contentDiv) {
+    loadDoctorCards();
+  }
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   loadDoctorCards();
@@ -87,9 +96,20 @@ export function showBookingOverlay(e, doctor, patient) {
 
 
 // Filter Input
-document.getElementById("searchBar").addEventListener("input", filterDoctorsOnChange);
-document.getElementById("filterTime").addEventListener("change", filterDoctorsOnChange);
-document.getElementById("filterSpecialty").addEventListener("change", filterDoctorsOnChange);
+const searchBar = document.getElementById("searchBar");
+if (searchBar) {
+  searchBar.addEventListener("input", filterDoctorsOnChange);
+}
+
+const filterTime = document.getElementById("filterTime");
+if (filterTime) {
+  filterTime.addEventListener("change", filterDoctorsOnChange);
+}
+
+const filterSpecialty = document.getElementById("filterSpecialty");
+if (filterSpecialty) {
+  filterSpecialty.addEventListener("change", filterDoctorsOnChange);
+}
 
 
 

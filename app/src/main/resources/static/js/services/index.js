@@ -59,22 +59,18 @@
 
 /* js/services/index.js */
 
-// Import the openModal function to handle showing login popups/modals
-// (Assuming path relative to 'js/services/index.js' to get to 'js/render.js')
+import { openModal } from '../components/modals.js'
 import { selectRole } from '../render.js';
-
-// Import the base API URL from the config file
-// (Assuming a 'config.js' file one level up)
 import { API_BASE_URL } from '../config/config.js';
 
 // Define constants for the admin and doctor login API endpoints using the base URL
-const ADMIN_API = `${API_BASE_URL}/api/admin/login`;
-const DOCTOR_API = `${API_BASE_URL}/api/doctor/login`;
+const ADMIN_API = `${API_BASE_URL}/admin/login`;
+const DOCTOR_API = `${API_BASE_URL}/doctor/login`;
 
 /**
  * Use the window.onload event to ensure DOM elements are available after page load
  */
-window.onload = () => {
+window.addEventListener('DOMContentLoaded', () => {
     // Select the role buttons using the IDs from index.html
     const adminBtn = document.getElementById('admin-btn');
     const doctorBtn = document.getElementById('doctor-btn');
@@ -84,6 +80,7 @@ window.onload = () => {
     // Add a click event listener that calls openModal('adminLogin')
     if (adminBtn) {
         adminBtn.addEventListener('click', () => {
+            openModal("adminLogin");
             selectRole('admin');
         });
     }
@@ -92,6 +89,7 @@ window.onload = () => {
     // Add a click event listener that calls openModal('doctorLogin')
     if (doctorBtn) {
         doctorBtn.addEventListener('click', () => {
+            openModal("doctorLogin");
             selectRole('doctor');
         });
     }
@@ -104,7 +102,7 @@ window.onload = () => {
             selectRole('patient');
         });
     }
-};
+});
 
 /**
  * Define a function named adminLoginHandler on the global window object
@@ -123,12 +121,12 @@ window.adminLoginHandler = async () => {
             return;
         }
 
-        const username = usernameInput.value;
+        const identifier = usernameInput.value;
         const password = passwordInput.value;
 
         // Step 2: Create an admin object with these credentials
         const admin = {
-            username: username,
+            identifier: identifier,
             password: password,
         };
 
@@ -179,12 +177,12 @@ window.doctorLoginHandler = async () => {
             return;
         }
         
-        const email = emailInput.value;
+        const identifier = emailInput.value;
         const password = passwordInput.value;
 
         // Step 2: Create a doctor object with these credentials
         const doctor = {
-            email: email,
+            identifier: identifier,
             password: password,
         };
 

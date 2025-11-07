@@ -113,11 +113,7 @@ and triggers modal-based login functionality.
     <link rel="icon" href="./assets/images/logo/logo.png">
     <link rel="stylesheet" href="./assets/css/index.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <script src="./js/util.js" type="module" defer></script>
-    <script src="./js/render.js" type="module" defer></script>
-    <script src="./js/components/modals.js" type="module" defer></script>
-    <script src="./js/components/header.js" type="module" defer></script>
-    <script src="./js/components/footer.js" type="module" defer></script>
+    <script src="js/services/index.js" type="module" defer></script>
     <title>Smart Clinic</title>
 </head>
 <body>
@@ -134,12 +130,11 @@ and triggers modal-based login functionality.
         </div>
         <div id="footer"></div>
         <div id="modal" class="modal">
-            <button id="closeModal"></button>
-            <div id="modal-body">
-
+            <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>
+                <div id="modal-body"></div>
             </div>
         </div>
     </main>
 </body>
-<script type="module" src="js/services/index.js" defer></script>
 </html>
