@@ -32,7 +32,73 @@ Below I am stating some things I would personally implement differently:
 - Global error handling
 - Records as DTOs
 
+## Resources / Front-End Project Structure
 
+```declarative
+app/src/main/resources
+├── application.properties
+├── static
+│   ├── index.html
+│   ├── assets
+│   │   ├── css
+│   │   │   ├── addPrescription.css
+│   │   │   ├── adminDashboard.css
+│   │   │   ├── doctorDashboard.css
+│   │   │   ├── index.css
+│   │   │   ├── patientDashboard.css
+│   │   │   ├── style.css
+│   │   │   └── updateAppointment.css
+│   │   └── images
+│   │       ├── addPrescriptionIcon
+│   │       │   └── addPrescription.png
+│   │       ├── edit
+│   │       │   └── edit.png
+│   │       ├── defineRole
+│   │       │   └── index.png
+│   │       └── logo
+│   │           └── logo.png
+│   ├── js
+│   │   ├── components
+│   │   │   ├── appointmentRow.js
+│   │   │   ├── doctorCard.js
+│   │   │   ├── footer.js
+│   │   │   ├── header.js
+│   │   │   ├── modals.js
+│   │   │   ├── patientRecordRow.js
+│   │   │   └── patientRows.js
+│   │   ├── config
+│   │   │   ├── config.js
+│   │   ├── services
+│   │   │   ├── appointmentRecordService.js
+│   │   │   ├── doctorServices.js
+│   │   │   ├── index.js
+│   │   │   ├── patientServices.js
+│   │   │   └── prescriptionServices.js
+│   │   ├── addPrescription.js
+│   │   ├── adminDashboard.js
+│   │   ├── appointmentRecord.js
+│   │   ├── doctorDashboard.js
+│   │   ├── loggedPatient.js
+│   │   ├── patientAppointment.js
+│   │   ├── patientDashboard.js
+│   │   ├── patientRecordServices.js
+│   │   ├── render.js
+│   │   ├── updateAppointment.js
+│   │   └── util.js
+│   └── pages
+│       ├── addPrescription.html
+│       ├── loggedPatientDashboard.html
+│       ├── patientAppointments.html
+│       ├── patientDashboard.html
+│       ├── patientRecord.html
+│       └── updateAppointment.html
+└── templates
+    ├── admin
+    │   └── adminDashboard.html
+    └── doctor
+        └── doctorDashboard.html
 
-🚧 Project Under Construction...
+```
+
+## 🚧 Frontend Still Under Development...
 
