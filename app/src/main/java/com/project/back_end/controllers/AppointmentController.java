@@ -72,9 +72,9 @@ public class AppointmentController {
         ResponseEntity<Map<String, String>> validationResult = service.validateToken(token, "patient");
         Map<String, Object> response = new HashMap<>();
 
-        if (!validationResult.getStatusCode().is2xxSuccessful()) {
+        if (validationResult.getStatusCode().is2xxSuccessful()) {
             if (service.validateAppointment(appointment) == 0) {
-                boolean booked = appointmentService.bookAppointment(appointment) == 0;
+                boolean booked = appointmentService.bookAppointment(appointment) == 1;
                 if (booked) {
                     response.put("status", "success");
                     response.put("message", "Appointment booked.");

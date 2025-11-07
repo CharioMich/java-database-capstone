@@ -38,6 +38,7 @@ public class PatientController {
     //    - Handles HTTP GET requests to retrieve patient details using a token.
     //    - Validates the token for the `"patient"` role using the shared service.
     //    - If the token is valid, returns patient information; otherwise, returns an appropriate error message.
+    @GetMapping("/{token}")
     public ResponseEntity<Map<String, Object>> getPatient(@PathVariable String token) {
         ResponseEntity<Map<String, String>> validationResult = service.validateToken(token, "patient");
         if (!validationResult.getStatusCode().is2xxSuccessful()) {

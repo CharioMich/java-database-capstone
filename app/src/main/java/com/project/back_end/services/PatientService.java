@@ -45,7 +45,7 @@ public class PatientService {
     @Transactional
     public int createPatient(Patient patient) {
         try {
-            if (patientRepository.findById(patient.getId()).isPresent())
+            if (patientRepository.findByEmailOrPhone(patient.getEmail(), patient.getPhone()).isPresent())
                 throw new EntityExistsException("Patient already exists.");
 
             patientRepository.save(patient);
@@ -54,7 +54,7 @@ public class PatientService {
             System.out.println("Patient with id: " + patient.getId() + " already exists.");
             return -1;
         } catch (Exception e) {
-            System.out.println("Error creating new patient");
+            System.out.println("Error creating new patient. >>>>>> Error: " + e.getMessage());
             return 0;
         }
     }

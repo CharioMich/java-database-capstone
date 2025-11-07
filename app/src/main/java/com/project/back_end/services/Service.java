@@ -174,6 +174,7 @@ public class Service {
         try {
             Patient storedPatient = patientRepository.findByEmail(login.getIdentifier())
                     .orElseThrow(() -> new EntityNotFoundException("Patient not found"));
+
             if (!storedPatient.getPassword().equals(login.getPassword())) {
                 response.put("error", "Invalid credentials");
                 return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);

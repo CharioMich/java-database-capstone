@@ -227,14 +227,26 @@ public class DoctorService {
     //    - The method fetches doctors matching the name and specialty criteria, then filters them based on their availability during the specified time period.
     //    - Instruction: Ensure proper filtering based on both the name and specialty as well as the specified time period.
     @Transactional(readOnly = true)
-    public Map<String, Object> filterDoctorsByNameSpecialtyAndTime(String name, String specialty, String amOrPm) {
+    public Map<String, Object> filterDoctorsByNameSpecialtyAndTime(String name, String amOrPm, String specialty) {
         Map<String, Object> response = new HashMap<>();
 
         try {
-            List<Doctor> doctors = doctorRepository.findByNameContainingIgnoreCaseAndSpecialtyIgnoreCase(
-                    name,
-                    specialty
-            );
+            List<Doctor> doctors;
+
+            if (!name.isEmpty() && !specialty.isEmpty()) {
+                doctors = doctorRepository.findByNameContainingIgnoreCaseAndSpecialtyIgnoreCase(name, specialty);
+            } else if (!name.isEmpty()) {
+                doctors = doctorRepository.findByNameLike(name);
+            } else if (!specialty.isEmpty()) {
+                doctors = doctorRepository.findBySpecialtyIgnoreCase(specialty);
+            } else {
+                doctors = doctorRepository.findAll();
+            }
+
+//            List<Doctor> doctors = doctorRepository.findByNameContainingIgnoreCaseAndSpecialtyIgnoreCase(
+//                    name,
+//                    specialty
+//            );
 
             String period = amOrPm.trim().toUpperCase();
 
