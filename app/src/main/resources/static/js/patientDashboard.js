@@ -9,7 +9,10 @@ import { setRole } from './util.js';
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  loadDoctorCards();
+  const contentDiv = document.getElementById("content");
+    if (contentDiv) {
+      loadDoctorCards();
+    }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -43,10 +46,22 @@ function loadDoctorCards() {
       console.error("Failed to load doctors:", error);
     });
 }
-// Filter Input
-document.getElementById("searchBar").addEventListener("input", filterDoctorsOnChange);
-document.getElementById("filterTime").addEventListener("change", filterDoctorsOnChange);
-document.getElementById("filterSpecialty").addEventListener("change", filterDoctorsOnChange);
+
+// Filter Input with guard clauses
+const searchBar = document.getElementById("searchBar");
+if (searchBar) {
+  searchBar.addEventListener("input", filterDoctorsOnChange);
+}
+
+const filterTime = document.getElementById("filterTime");
+if (filterTime) {
+  filterTime.addEventListener("change", filterDoctorsOnChange);
+}
+
+const filterSpecialty = document.getElementById("filterSpecialty");
+if (filterSpecialty) {
+  filterSpecialty.addEventListener("change", filterDoctorsOnChange);
+}
 
 
 
@@ -83,58 +98,3 @@ function filterDoctorsOnChange() {
     });
 }
 
-
-export async function signupPatient() {
-  try {
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const phone = document.getElementById("phone").value;
-    const address = document.getElementById("address").value;
-
-    const data = { name, email, password, phone, address };
-    const { success, message } = await patientSignup(data);
-    if (success) {
-      alert(message);
-      document.getElementById("modal").style.display = "none";
-      window.location.reload();
-    }
-    else alert(message);
-  } catch (error) {
-    console.error("Signup failed:", error);
-    alert("An error occurred while signing up.");
-  }
-};
-
-
-export async function loginPatient() {
-  try {
-    const identifier = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-
-    const login = {
-      identifier,
-      password
-    }
-    console.log("loginPatient :: ", login)
-    const response = await patientLogin(login);
-
-    console.log("Status Code:", response.status);
-    console.log("Response OK:", response.ok);
-    if (response.ok) {
-      const result = await response.json();
-      console.log(result);
-      setRole('loggedPatient');
-      localStorage.setItem('token', result.token)
-      window.location.href = '/pages/loggedPatientDashboard.html';
-    } else {
-      alert('Invalid credentials!');
-    }
-  }
-  catch (error) {
-    alert("Failed to Login : ", error);
-    console.log("Error :: loginPatient :: ", error)
-  }
-
-
-}
