@@ -108,5 +108,18 @@ app/src/main/resources
 
 ```
 
+## UI Screenshots
+
+Entry point  
+![](app/src/main/resources/static/assets/images/screenshots/cms-1.webp)  
+Search doctors  
+![](app/src/main/resources/static/assets/images/screenshots/cms-2.webp)  
+Update appointment modal  
+![](app/src/main/resources/static/assets/images/screenshots/cms-3.webp)  
+Patient records  
+![](app/src/main/resources/static/assets/images/screenshots/cms-4.webp)  
+Prescription modal  
+![](app/src/main/resources/static/assets/images/screenshots/cms-5.webp)  
+
 ### 🚧 Frontend Currently Under Development...
 
