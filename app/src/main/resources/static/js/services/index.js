@@ -64,8 +64,8 @@ import { selectRole } from '../render.js';
 import { API_BASE_URL } from '../config/config.js';
 
 // Define constants for the admin and doctor login API endpoints using the base URL
-const ADMIN_API = `${API_BASE_URL}/admin/login`;
-const DOCTOR_API = `${API_BASE_URL}/doctor/login`;
+const ADMIN_API = `${API_BASE_URL}/admin`;
+const DOCTOR_API = `${API_BASE_URL}/doctor`;
 
 /**
  * Use the window.onload event to ensure DOM elements are available after page load
@@ -121,12 +121,12 @@ window.adminLoginHandler = async () => {
             return;
         }
 
-        const identifier = usernameInput.value;
+        const username = usernameInput.value;
         const password = passwordInput.value;
 
         // Step 2: Create an admin object with these credentials
         const admin = {
-            identifier: identifier,
+            username: username,
             password: password,
         };
 
@@ -146,8 +146,8 @@ window.adminLoginHandler = async () => {
             // Store the token in localStorage
             localStorage.setItem('token', data.token);
             // Call selectRole('admin') to proceed (assuming selectRole is a global function)
-            // Or redirect:
-            window.location.href = '/admin-dashboard.html'; // Example redirect
+            // Or redirect: TODO
+            window.location.href = `/adminDashboard.html${token}`; // Example redirect
         } else {
             // Step 5: If login fails or credentials are invalid:
             // Show an alert with an error message
