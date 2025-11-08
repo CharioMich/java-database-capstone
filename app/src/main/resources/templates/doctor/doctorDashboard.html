@@ -121,10 +121,10 @@ This file defines the Doctor Dashboard interface, allowing doctors to view and m
     <link rel="stylesheet" th:href="@{/assets/css/doctorDashboard.css}" />
 
     <!-- 9. Common JavaScript Files (deferred) -->
-    <script th:src="@{/js/util.js}" defer></script>
-    <script th:src="@{/js/render.js}" defer></script>
-    <script th:src="@{/js/components/header.js}" defer></script>
-    <script th:src="@{/js/components/footer.js}" defer></script>
+    <script th:src="@{/js/util.js}" type="module" defer></script>
+    <script th:src="@{/js/render.js}" type="module" defer></script>
+    <script th:src="@{/js/components/header.js}" type="module" defer></script>
+    <script th:src="@{/js/components/footer.js}" type="module" defer></script>
     <script type="module" th:src="@{/js/doctorDashboard.js}" defer></script>
 </head>
 
