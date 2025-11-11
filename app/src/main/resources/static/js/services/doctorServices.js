@@ -189,13 +189,6 @@ export async function saveDoctor(doctor, token) {
 }
 
 export async function filterDoctors(name = '', time = '', specialty = '') {
-//    Encode each parameter for URL safety, using 'null' for empty values as path parameters are required
-//    const encodedName = name ? encodeURIComponent(name) : 'null';
-//    const encodedTime = time ? encodeURIComponent(time) : 'null';
-//    const encodedspecialty = specialty ? encodeURIComponent(specialty) : 'null';
-//
-//    // Construct the full URL with path parameters
-//    const url = `${DOCTOR_API}/filter/${encodedName}/${encodedTime}/${encodedspecialty}`;
 
     // Normalize undefined/null to empty strings
     name = name ?? '';

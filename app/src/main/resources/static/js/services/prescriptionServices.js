@@ -1,10 +1,10 @@
 // prescriptionServices.js
 import { API_BASE_URL } from '../config/config.js'
 
-const PRESCRITION_API = API_BASE_URL + "/prescription"
+const PRESCRIPTION_API = API_BASE_URL + "/prescription"
 export async function savePrescription(prescription, token) {
   try {
-    const response = await fetch(`${PRESCRITION_API}/${token}`, {
+    const response = await fetch(`${PRESCRIPTION_API}/${token}`, {
       method: "POST",
       headers: {
         "Content-type": "application/json"
@@ -22,7 +22,7 @@ export async function savePrescription(prescription, token) {
 
 export async function getPrescription(appointmentId, token) {
   try {
-    const response = await fetch(`${PRESCRITION_API}/${appointmentId}/${token}`, {
+    const response = await fetch(`${PRESCRIPTION_API}/${appointmentId}/${token}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
