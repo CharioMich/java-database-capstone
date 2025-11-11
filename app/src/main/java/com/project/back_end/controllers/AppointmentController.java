@@ -39,11 +39,11 @@ public class AppointmentController {
     //    - First validates the token for role `"doctor"` using the `Service`.
     //    - If the token is valid, returns appointments for the given patient on the specified date.
     //    - If the token is invalid or expired, responds with the appropriate message and status code.
-    @GetMapping("/{date}/{patientName}/{token}")
+    @GetMapping("/filter")
     public ResponseEntity<Map<String, Object>> getAppointments(
-                @PathVariable LocalDate date,   // date must be in ISO-8601 format so Spring automatically turns it from string to LocalDate
-                @PathVariable String patientName,
-                @PathVariable String token
+            @RequestParam(required = false) String patientName,
+            @RequestParam LocalDate date,   // date must be in ISO-8601 format so Spring automatically turns it from string to LocalDate
+            @RequestParam String token
             )
     {
         ResponseEntity<Map<String, String>> validationResult = service.validateToken(token, "doctor");
