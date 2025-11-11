@@ -5,9 +5,10 @@ export function openModal(type) {
   let modalContent = '';
   if (type === 'addDoctor') {
     modalContent = `
-         <h2>Add Doctor</h2>
-         <input type="text" id="doctorName" placeholder="Doctor Name" class="input-field">
-         <select id="specialization" class="input-field select-dropdown">
+        <div class="add-doctor-modal">
+            <h2>Add Doctor</h2>
+            <input type="text" id="doctorName" placeholder="Doctor Name" class="input-field">
+            <select id="specialization" class="input-field select-dropdown">
              <option value="">Specialization</option>
                         <option value="cardiologist">Cardiologist</option>
                         <option value="dermatologist">Dermatologist</option>
@@ -24,20 +25,21 @@ export function openModal(type) {
                         <option value="gastroenterologist">Gastroenterologist</option>
                         <option value="general">General Physician</option>
 
-        </select>
-        <input type="email" id="doctorEmail" placeholder="Email" class="input-field">
-        <input type="password" id="doctorPassword" placeholder="Password" class="input-field">
-        <input type="text" id="doctorPhone" placeholder="Mobile No." class="input-field">
-        <div class="availability-container">
-        <label class="availabilityLabel">Select Availability:</label>
-          <div class="checkbox-group">
+            </select>
+            <input type="email" id="doctorEmail" placeholder="Email" class="input-field">
+            <input type="password" id="doctorPassword" placeholder="Password" class="input-field">
+            <input type="text" id="doctorPhone" placeholder="Mobile No." class="input-field">
+            <div class="availability-container">
+            <label class="availabilityLabel">Select Availability:</label>
+            <div class="checkbox-group">
               <label><input type="checkbox" name="availability" value="09:00-10:00"> 9:00 AM - 10:00 AM</label>
               <label><input type="checkbox" name="availability" value="10:00-11:00"> 10:00 AM - 11:00 AM</label>
               <label><input type="checkbox" name="availability" value="11:00-12:00"> 11:00 AM - 12:00 PM</label>
               <label><input type="checkbox" name="availability" value="12:00-13:00"> 12:00 PM - 1:00 PM</label>
-          </div>
+            </div>
+            </div>
+            <button class="dashboard-btn" id="saveDoctorBtn">Save</button>
         </div>
-        <button class="dashboard-btn" id="saveDoctorBtn">Save</button>
       `;
   } else if (type === 'patientLogin') {
     modalContent = `
@@ -69,7 +71,7 @@ export function openModal(type) {
     modalContent = `
         <h2>Doctor Login</h2>
         <input type="text" id="doctor-email" placeholder="Email" class="input-field">
-        <input type="doctor-password" id="password" placeholder="Password" class="input-field">
+        <input type="doctor-password" id="doctor-password" placeholder="Password" class="input-field">
         <button class="dashboard-btn" id="doctorLoginBtn" >Login</button>
       `;
   }
