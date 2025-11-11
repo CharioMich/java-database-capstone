@@ -253,7 +253,7 @@ public class DoctorService {
             List<Doctor> filteredDoctors = doctors.stream()
                     .filter(doctor -> {
                         if (doctor.getAvailableTimes() == null || doctor.getAvailableTimes().isEmpty()) return false;
-
+                        if (period.isEmpty()) return true;
                         return doctor.getAvailableTimes().stream().anyMatch(time -> {
                             try {
                                 int hour = Integer.parseInt(time.split(":")[0]);

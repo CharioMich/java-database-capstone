@@ -156,7 +156,7 @@ public class AppointmentService {
     //    - It uses `@Transactional` to ensure that database operations are consistent and handled in a single transaction.
     //    - Instruction: Ensure the correct use of transaction boundaries, especially when querying the database for appointments.
     @Transactional(readOnly = true)
-    public ResponseEntity<Map<String, Object>> getAppointment(String pname, LocalDate date, String token) {
+    public ResponseEntity<Map<String, Object>> getAppointment(String patientName, LocalDate date, String token) {
         Map<String, Object> response = new HashMap<>();
         List<Appointment> appointments;
         try {
@@ -167,18 +167,17 @@ public class AppointmentService {
             LocalDateTime startOfDay = date.atStartOfDay();
             // End of the day (23:59:59.999999999)
             LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
-
             // Here we use both
             // findByDoctorIdAndPatient_NameContainingIgnoreCaseAndAppointmentTimeBetween
             // and
             // findByDoctorIdAndAppointmentTimeBetween
-            // to handle the case of pname being null.
+            // to handle the case of patientName being null.
             // A better, more advanced approach would be Specifications (JpaSpecificationExecutor)
-            if (pname != null) {
-                ;appointments = appointmentRepository
-                        .findByDoctorIdAndPatient_NameContainingIgnoreCaseAndAppointmentTimeBetween(doctor.getId(), pname, startOfDay, endOfDay);
+            if (patientName != null && !patientName.isEmpty()) {
+                appointments = appointmentRepository
+                        .findByDoctorIdAndPatient_NameContainingIgnoreCaseAndAppointmentTimeBetween(doctor.getId(), patientName, startOfDay, endOfDay);
             } else {
-                ;appointments = appointmentRepository
+                appointments = appointmentRepository
                         .findByDoctorIdAndAppointmentTimeBetween(doctor.getId(), startOfDay, endOfDay);
             }
             response.put("status", "success");
