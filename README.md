@@ -28,15 +28,23 @@ Since Spring MVC is used for this project, code is organized into three layers:
   However, it has been a very good opportunity to practice fundamental frontend coding skills.
 
 ### To run with docker:
-```declarative
-git clone git@github.com:CharioMich/java-database-capstone.git
+1. Clone the repo (SSH)
+    ```
+    git clone git@github.com:CharioMich/java-database-capstone.git
+    ```
+2. Go to project directory
+    ```
+    cd java-capstone/app
+    ```
+3. Build the image
+    ```
+    docker build -t smart-clinic-app .
+    ```
+4. Run the container
+    ```
+    docker run -p 8080:8080 smart-clinic-app
+    ```
 
-cd java-capstone/app
-
-docker build -t smart-clinic-app .
-
-docker run -p 8080:8080 smart-clinic-app
-```
 
 ## Possible Improvements 
 The project is developed under the course instructions, so any personal opinions regarding structure, logic or design are limited.
@@ -132,5 +140,5 @@ Patient records
 Prescription modal  
 ![](app/src/main/resources/static/assets/images/screenshots/cms-5.webp)  
 
-### 🚧 Frontend Currently Under Development...
+#### 🚧 Frontend requiring a few small fixes.
 
