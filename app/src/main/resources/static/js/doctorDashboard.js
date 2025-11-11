@@ -59,7 +59,7 @@
   Import createPatientRow to generate a table row for each patient appointment
 */
 import { getAllAppointments } from './services/appointmentRecordService.js';
-import { createPatientRow } from '../components/patientRows.js';
+import { createPatientRow } from './components/patientRows.js';
 
 
 /*
@@ -74,9 +74,9 @@ const appointmentTableBody = document.getElementById('patientTableBody');
 const getTodayDate = () => new Date().toISOString().split('T')[0];
 
 let selectedDate = getTodayDate();
-const token = localStorage.getItem('authToken');
+const token = localStorage.getItem('token');
 // Initialize patientName to the string "null" as expected by the backend per comments
-let patientName = "null";
+let patientName = "";
 
 
 /**
@@ -111,8 +111,9 @@ async function loadAppointments() {
 
     try {
         // Step 1: Call getAllAppointments
-        const appointments = await getAllAppointments(selectedDate, patientName, token);
-
+        const response = await getAllAppointments(selectedDate, patientName, token);
+        const appointments = response.appointments;
+        console.log(response);
         // Step 2: Clear the table body content
         appointmentTableBody.innerHTML = "";
 
@@ -124,7 +125,7 @@ async function loadAppointments() {
             // Step 4: If appointments exist
             appointments.forEach(appointment => {
                 // Call createPatientRow to generate a table row
-                const row = createPatientRow(appointment);
+                const row = createPatientRow(appointment.patient, appointment.id, appointment.doctor.id);
                 // Append row to the table body
                 appointmentTableBody.appendChild(row);
             });

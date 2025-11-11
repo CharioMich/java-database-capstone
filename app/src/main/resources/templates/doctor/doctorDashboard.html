@@ -105,22 +105,13 @@ This file defines the Doctor Dashboard interface, allowing doctors to view and m
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- 5. Character Encoding -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- 6. Favicon -->
     <link rel="icon" type="image/png" th:href="@{/assets/images/logo/logo.png}" />
-
-    <!-- 7. Page Title -->
     <title>Doctor Dashboard</title>
-
-    <!-- 8. CSS Stylesheets -->
     <link rel="stylesheet" th:href="@{/assets/css/style.css}" />
     <link rel="stylesheet" th:href="@{/assets/css/adminDashboard.css}" />
     <link rel="stylesheet" th:href="@{/assets/css/doctorDashboard.css}" />
-
-    <!-- 9. Common JavaScript Files (deferred) -->
     <script th:src="@{/js/util.js}" type="module" defer></script>
     <script th:src="@{/js/render.js}" type="module" defer></script>
     <script th:src="@{/js/components/header.js}" type="module" defer></script>
@@ -129,30 +120,20 @@ This file defines the Doctor Dashboard interface, allowing doctors to view and m
 </head>
 
 <body onload="renderContent()">
-
 <!-- 11. Main Container -->
 <div class="container">
-
-    <!-- 12. Wrapper -->
     <div class="wrapper">
-
-        <!-- 13. Header Placeholder -->
         <div id="header"></div>
-
-        <!-- 14. Main Content Area -->
         <div class="main-content">
-
             <!-- 15. Search Bar -->
             <div class="search-section">
                 <input type="text" id="searchBar" class="searchBar" placeholder="Search Bar for custom output" />
             </div>
-
             <!-- 16. Filter Controls -->
             <div class="filters">
-                <button id="todayButton">Today</button>
-                <input type="date" id="datePicker" />
+                <button id="todayButton" class="today-btn">Today</button>
+                <input type="date" class="date-picker" id="datePicker" />
             </div>
-
             <!-- 17. Patient Table -->
             <table class="patient-table">
                 <thead>
@@ -168,12 +149,8 @@ This file defines the Doctor Dashboard interface, allowing doctors to view and m
                 <!-- Dynamic patient rows will be injected here -->
                 </tbody>
             </table>
-
         </div>
-
-        <!-- 18. Footer Placeholder -->
         <div id="footer"></div>
-
     </div>
 </div>
 

@@ -127,7 +127,6 @@ export function createDoctorCard(doctor) {
         // Add delete button to actions container
         actionsDiv.appendChild(removeBtn);
     }
-    // ---
     // === PATIENT (NOT LOGGED-IN) ROLE ACTIONS ===
     else if (role === "patient") {
         // Create a book now button
@@ -145,7 +144,6 @@ export function createDoctorCard(doctor) {
         // Add button to actions container
         actionsDiv.appendChild(bookNow);
     }
-    // ---
     // === LOGGED-IN PATIENT ROLE ACTIONS ===
     else if (role === "loggedPatient") {
         // Create a book now button
@@ -179,7 +177,6 @@ export function createDoctorCard(doctor) {
         // Add button to actions container
         actionsDiv.appendChild(bookNow);
     }
-    // ---
 
     // Append doctor info and action buttons to the card
     card.appendChild(infoDiv);
