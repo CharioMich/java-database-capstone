@@ -27,6 +27,17 @@ Since Spring MVC is used for this project, code is organized into three layers:
 - The frontend part is structured by the project template and follows a rather "old-school" approach.
   However, it has been a very good opportunity to practice fundamental frontend coding skills.
 
+### To run with docker:
+```declarative
+git clone git@github.com:CharioMich/java-database-capstone.git
+
+cd java-capstone/app
+
+docker build -t smart-clinic-app .
+
+docker run -p 8080:8080 smart-clinic-app
+```
+
 ## Possible Improvements 
 The project is developed under the course instructions, so any personal opinions regarding structure, logic or design are limited.
 Below I am stating some things I would personally implement differently:
