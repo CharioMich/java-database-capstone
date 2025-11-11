@@ -201,7 +201,6 @@ public class DoctorController {
             @RequestParam(required = false, defaultValue = "") String time,
             @RequestParam(required = false, defaultValue = "") String specialty
     ) {
-        System.out.println("LOGGING >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> name: " + name + " time " + time + " specialty " + specialty);
         Map<String, Object> response = doctorService.filterDoctorsByNameSpecialtyAndTime(name, time, specialty);
         return new ResponseEntity<>(response, HttpStatus.OK); // Incomplete Http status logic
     }
