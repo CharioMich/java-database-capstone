@@ -71,9 +71,9 @@
     If saving fails, show an error message
 */
 
-import { openModal } from '../components/modals.js';
+import { openModal } from './components/modals.js';
 import { getDoctors, filterDoctors, saveDoctor } from './services/doctorServices.js';
-import { createDoctorCard } from '../components/doctorCard.js';
+import { createDoctorCard } from './components/doctorCard.js';
 
 // Get the content container where doctor cards will be rendered
 const contentDiv = document.getElementById("content");
@@ -101,9 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterTime = document.getElementById("filterTime");
     const filterSpecialty = document.getElementById("filterSpecialty");
 
-    if (searchBar) searchBar.addEventListener("input", filterDoctorsOnChange);
-    if (filterTime) filterTime.addEventListener("change", filterDoctorsOnChange);
-    if (filterSpecialty) filterSpecialty.addEventListener("change", filterDoctorsOnChange);
+    if (searchBar) searchBar.addEventListener("input", filterDoctorsOnChangeAdmin);
+    if (filterTime) filterTime.addEventListener("change", filterDoctorsOnChangeAdmin);
+    if (filterSpecialty) filterSpecialty.addEventListener("change", filterDoctorsOnChangeAdmin);
 });
 
 /**
@@ -139,10 +139,10 @@ function renderDoctorCards(doctors) {
 async function loadDoctorCards() {
     try {
         // Call getDoctors() from the service layer
-        const doctors = await getDoctors();
+        const res = await getDoctors();
 
         // Render the fetched doctors
-        renderDoctorCards(doctors);
+        renderDoctorCards(res.doctors);
 
     } catch (error) {
         // Handle any fetch errors by logging them
@@ -156,19 +156,22 @@ async function loadDoctorCards() {
  * Function: filterDoctorsOnChange
  * Purpose: Filter doctors based on name, available time, and specialty
  */
-async function filterDoctorsOnChange() {
+async function filterDoctorsOnChangeAdmin() {
     try {
-        // Read values from the search bar and filters
-        const name = document.getElementById("searchBar")?.value.trim() || '';
-        const time = document.getElementById("filterTime")?.value || '';
-        const specialty = document.getElementById("filterSpecialty")?.value || '';
+        const searchBar = document.getElementById("searchBar").value.trim();
+        const filterTime = document.getElementById("filterTime").value;
+        const filterSpecialty = document.getElementById("filterSpecialty").value;
+
+        const name = searchBar.length > 0 ? searchBar : null;
+        const time = filterTime.length > 0 ? filterTime : null;
+        const specialty = filterSpecialty.length > 0 ? filterSpecialty : null;
 
         // Call filterDoctors(name, time, specialty) from the service
         // Pass the values directly. The service handles non-existing/empty parameters.
-        const filteredDoctors = await filterDoctors(name, time, specialty);
+        const res = await filterDoctors(name, time, specialty);
 
         // Render the filtered doctors
-        renderDoctorCards(filteredDoctors);
+        renderDoctorCards(res.doctors);
 
     } catch (error) {
         // Catch and display any errors with an alert
@@ -225,15 +228,9 @@ window.adminAddDoctor = async function (event) {
         if (result.success) {
             // If save is successful:
             alert("Doctor added successfully: " + result.message);
-            // Assuming the modal provides a way to close itself, or we manually hide it
-            // For simplicity, we'll rely on the modal component to handle closing, or use a general approach:
 
             // Reload the doctor list to display the new doctor
             await loadDoctorCards();
-
-            // Optionally manually close the modal if required, e.g., openModal(null) or a specific close function
-            // Since we don't have a specific closeModal function, we'll just focus on reloading data.
-            // If running on a dedicated page, a simple page reload might work too: window.location.reload();
 
         } else {
             // If saving fails, show an error message
