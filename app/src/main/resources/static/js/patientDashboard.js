@@ -50,22 +50,22 @@ function loadDoctorCards() {
 // Filter Input with guard clauses
 const searchBar = document.getElementById("searchBar");
 if (searchBar) {
-  searchBar.addEventListener("input", filterDoctorsOnChange);
+  searchBar.addEventListener("input", filterDoctorsOnChangePatient);
 }
 
 const filterTime = document.getElementById("filterTime");
 if (filterTime) {
-  filterTime.addEventListener("change", filterDoctorsOnChange);
+  filterTime.addEventListener("change", filterDoctorsOnChangePatient);
 }
 
 const filterSpecialty = document.getElementById("filterSpecialty");
 if (filterSpecialty) {
-  filterSpecialty.addEventListener("change", filterDoctorsOnChange);
+  filterSpecialty.addEventListener("change", filterDoctorsOnChangePatient);
 }
 
 
 
-function filterDoctorsOnChange() {
+function filterDoctorsOnChangePatient() {
   const searchBar = document.getElementById("searchBar").value.trim();
   const filterTime = document.getElementById("filterTime").value;
   const filterSpecialty = document.getElementById("filterSpecialty").value;

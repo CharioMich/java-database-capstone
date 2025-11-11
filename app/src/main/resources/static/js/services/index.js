@@ -143,11 +143,11 @@ window.adminLoginHandler = async () => {
         // Step 4: If the response is successful:
         if (response.ok) {
             const data = await response.json();
+
             // Store the token in localStorage
             localStorage.setItem('token', data.token);
-            // Call selectRole('admin') to proceed (assuming selectRole is a global function)
-            // Or redirect: TODO
-            window.location.href = `/adminDashboard.html${token}`; // Example redirect
+
+            window.location.href = `/adminDashboard/${data.token}`; // redirect
         } else {
             // Step 5: If login fails or credentials are invalid:
             // Show an alert with an error message
@@ -187,7 +187,7 @@ window.doctorLoginHandler = async () => {
         };
 
         // Step 3: Use fetch() to send a POST request to the DOCTOR_API endpoint
-        const response = await fetch(DOCTOR_API, {
+        const response = await fetch(DOCTOR_API + '/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -201,9 +201,8 @@ window.doctorLoginHandler = async () => {
             const data = await response.json();
             // Store the token in localStorage
             localStorage.setItem('token', data.token);
-            // Call selectRole('doctor') to proceed (assuming selectRole is a global function)
-            // Or redirect:
-            window.location.href = '/doctor-dashboard.html'; // Example redirect
+            console.log("LOGGED IN") // TODO
+            window.location.href = `/doctorDashboard/${data.token}`; // redirect
         } else {
             // Step 5: If login fails:
             // Show an alert for invalid credentials

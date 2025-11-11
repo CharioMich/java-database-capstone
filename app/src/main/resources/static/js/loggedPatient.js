@@ -5,17 +5,12 @@ import { filterDoctors } from './services/doctorServices.js';
 import { bookAppointment } from './services/appointmentRecordService.js';
 
 document.addEventListener("DOMContentLoaded", () => {
-  // --- FIX #1: Check if the 'content' div exists ---
   // This code runs on page load, but 'content' only exists on the patient page.
   // It prevents loading doctors even if we are on index.html page which gets triggered from the imports chain
   const contentDiv = document.getElementById("content");
   if (contentDiv) {
     loadDoctorCards();
   }
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  loadDoctorCards();
 });
 
 function loadDoctorCards() {
@@ -80,7 +75,6 @@ export function showBookingOverlay(e, doctor, patient) {
       status: 0
     };
 
-
     const { success, message } = await bookAppointment(appointment, token);
 
     if (success) {
@@ -96,24 +90,27 @@ export function showBookingOverlay(e, doctor, patient) {
 
 
 // Filter Input
-const searchBar = document.getElementById("searchBar");
-if (searchBar) {
-  searchBar.addEventListener("input", filterDoctorsOnChange);
+if (window.location.pathname.includes("/loggedPatient")) {
+    const searchBar = document.getElementById("searchBar");
+    if (searchBar) {
+      searchBar.addEventListener("input", filterDoctorsOnChangeLoggedPatient);
+    }
+
+    const filterTime = document.getElementById("filterTime");
+    if (filterTime) {
+      filterTime.addEventListener("change", filterDoctorsOnChangeLoggedPatient);
+    }
+
+    const filterSpecialty = document.getElementById("filterSpecialty");
+    if (filterSpecialty) {
+      filterSpecialty.addEventListener("change", filterDoctorsOnChangeLoggedPatient);
+    }
 }
 
-const filterTime = document.getElementById("filterTime");
-if (filterTime) {
-  filterTime.addEventListener("change", filterDoctorsOnChange);
-}
-
-const filterSpecialty = document.getElementById("filterSpecialty");
-if (filterSpecialty) {
-  filterSpecialty.addEventListener("change", filterDoctorsOnChange);
-}
 
 
 
-function filterDoctorsOnChange() {
+function filterDoctorsOnChangeLoggedPatient() {
   const searchBar = document.getElementById("searchBar").value.trim();
   const filterTime = document.getElementById("filterTime").value;
   const filterSpecialty = document.getElementById("filterSpecialty").value;
@@ -125,13 +122,11 @@ function filterDoctorsOnChange() {
 
   filterDoctors(name, time, specialty)
     .then(response => {
-//    console.log(response);
       const doctors = response["doctors"];
       const contentDiv = document.getElementById("content");
       contentDiv.innerHTML = "";
 
       if (doctors.length > 0) {
-        console.log(doctors);
         doctors.forEach(doctor => {
           const card = createDoctorCard(doctor);
           contentDiv.appendChild(card);
